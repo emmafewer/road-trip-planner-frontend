@@ -16,10 +16,13 @@ class Map extends React.Component {
     });
     fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
     .then(resp => resp.json())
-    .then(parks => this.getParkMarkers(parks, map))
+    .then(parks => {
+        this.getParkMarkers(parks, map)
+        })
     }
 
     getParkMarkers = (parks, map) => {
+
         const features = []
 
         parks.data.forEach( park => {
@@ -33,6 +36,7 @@ class Map extends React.Component {
                 'properties' : {
                     'name' : park.fullName,
                     'description' : park.description,
+                    'image' : park.images
                 }
             }
             features.push(feature)
@@ -45,6 +49,71 @@ class Map extends React.Component {
                 "features": features
             }
         })
+
+        // var hoveredStateId = null;
+        //     map.addSource("states", {
+        //         "type": "geojson",
+        //         "data": 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson'
+                // {
+                //     "type": "FeatureCollection",
+                //     "features": features
+                // }
+            // })
+
+            // map.addLayer({
+            //     'id': 'state-fills',
+            //     'type': 'fill',
+            //     'source': 'states',
+            //     'layout': {},
+            //     'paint': {
+            //     'fill-color': '#627BC1',
+            //     'fill-opacity': [
+            //     'case',
+            //     ['boolean', ['feature-state', 'hover'], false],
+            //     1,
+            //     0.5
+            //     ]
+            //     }
+            //     });
+                 
+            //     map.addLayer({
+            //     'id': 'state-borders',
+            //     'type': 'line',
+            //     'source': 'states',
+            //     'layout': {},
+            //     'paint': {
+            //     'line-color': '#627BC1',
+            //     'line-width': 2
+            //     }
+            //     });
+
+                // map.on('mousemove', 'state-fills', function (e) {
+                //     if (e.features.length > 0) {
+                //     if (hoveredStateId) {
+                //     map.setFeatureState(
+                //     { source: 'states', id: hoveredStateId },
+                //     { hover: false }
+                //     );
+                //     }
+                //     hoveredStateId = e.features[0].id;
+                //     map.setFeatureState(
+                //     { source: 'states', id: hoveredStateId },
+                //     { hover: true }
+                //     );
+                //     }
+                //     });
+                     
+                    // When the mouse leaves the state-fill layer, update the feature state of the
+                    // previously hovered feature.
+                    // map.on('mouseleave', 'state-fills', function () {
+                    // if (hoveredStateId) {
+                    // map.setFeatureState(
+                    // { source: 'states', id: hoveredStateId },
+                    // { hover: false }
+                    // );
+                    // }
+                    // hoveredStateId = null;
+                    // });
 
         features.forEach(marker => {
             const popup = new mapboxgl.Popup()
@@ -60,6 +129,7 @@ class Map extends React.Component {
         });
 
     }
+
 
     render () {
         return (
