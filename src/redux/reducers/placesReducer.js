@@ -13,6 +13,10 @@ const placesReducer = (state = initialState, action) => {
             return {
                 ...state, area: action.area
             }
+        case 'SET_FILTERED_PARKS':
+            return {
+                ...state, parks: action.parks
+            }
         default:
             return state
     }

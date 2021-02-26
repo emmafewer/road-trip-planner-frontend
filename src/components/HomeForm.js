@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 const HomeForm = (props) => {
   const classes = useStyles();
-  console.log(props.history)
   return (
     <div className="homeForm">
       {/* <div id="geocoder">{useGeocoder}</div> */}

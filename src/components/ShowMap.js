@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl'
+import { setFilteredParks } from '../redux/actions/placesActions';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw'
 
@@ -15,32 +16,35 @@ class ShowMap extends React.Component {
             scrollZoom: true,
         });
 
-        fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
-        .then(resp => resp.json())
-        .then(parks => {
-            this.specifyArea(parks, map)
-        })
+        // fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
+        // .then(resp => resp.json())
+        // .then(parks => {
+        //     this.specifyArea(parks, map)
+        //     this.props.setFilteredParks(parks)
+        // })
     }
 
-    specifyArea = (parks, map) => {
-        let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
-        let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
 
-        let endLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].latitude)
-        let endLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].longitude)
+    specifyArea = (props, map) => {
+        debugger
+        // let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
+        // let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
 
-        let lowLat = (Math.min(startLat, endLat)-3).toString()
-        let highLat = (Math.max(startLat, endLat)+3).toString()
-        let lowLong = (Math.min(startLong, endLong)-3).toString()
-        let highLong = (Math.max(startLong, endLong)+3).toString()
+        // let endLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].latitude)
+        // let endLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].longitude)
 
-        let filteredParks = parks.data.filter(park => park.latitude >= lowLat && park.latitude <= highLat && park.longitude <= lowLong && park.longitude >= highLong)
+        // let lowLat = (Math.min(startLat, endLat)-3).toString()
+        // let highLat = (Math.max(startLat, endLat)+3).toString()
+        // let lowLong = (Math.min(startLong, endLong)-3).toString()
+        // let highLong = (Math.max(startLong, endLong)+3).toString()
+
+        // let filteredParks = parks.data.filter(park => park.latitude >= lowLat && park.latitude <= highLat && park.longitude <= lowLong && park.longitude >= highLong)
         
-        const center = new mapboxgl.LngLat(((startLong+endLong)/2),((startLat+endLat)/2))
-        map.setCenter(center)
-        map.setZoom(5)
+        // const center = new mapboxgl.LngLat(((startLong+endLong)/2),((startLat+endLat)/2))
+        // map.setCenter(center)
+        // map.setZoom(5)
         
-        this.getParkMarkers(filteredParks, map)
+        // this.getParkMarkers(filteredParks, map)
     }
 
     getParkMarkers = (parks, map) => {
@@ -87,8 +91,11 @@ class ShowMap extends React.Component {
 
     render () {
         return (
-            <div id="map">
+            <div className="showMap">
+                <div id="map" style={{width: "55vh", height: "50vh"}}>
+                </div>
             </div>
+
         );
     }
 }
@@ -98,5 +105,12 @@ const mapStateToProps = state => {
         state: state
     }
 }
+  
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         setFilteredParks: (parks) => dispatch(setFilteredParks(parks))
+//     }
+// }
+  
 
 export default connect(mapStateToProps)(ShowMap)

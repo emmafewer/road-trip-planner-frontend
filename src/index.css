@@ -77,7 +77,23 @@ body {
 
 .showContainer {
   color: white;
+  height: 80vh;
+  width: 120vh;
+  padding-top: 3em;
 }
+
+.sidePanel {
+  display:inline-block;
+  width: 40%;
+  float: left;
+}
+
+.showMap {
+  display:inline-block;
+  width: 60%;
+}
+
+
 
 
 

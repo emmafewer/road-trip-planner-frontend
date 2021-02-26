@@ -13,3 +13,10 @@ export const setArea = (area) => {
         area: area
     }
 }
+
+export const setFilteredParks = (parks) => {
+    return {
+        type: 'SET_FILTERED_PARKS',
+        parks: parks
+    }
+}
