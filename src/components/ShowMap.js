@@ -47,7 +47,6 @@ class ShowMap extends React.Component {
         const features = []
 
         parks.forEach( park => {
-           
             let feature = {
                 'type' : 'Feature',
                 'geometry' : {
@@ -56,8 +55,7 @@ class ShowMap extends React.Component {
                 },
                 'properties' : {
                     'name' : park.fullName,
-                    'description' : park.description,
-                    'image' : park.images
+                    'description' : park.description
                 }
             }
             features.push(feature)
@@ -72,8 +70,9 @@ class ShowMap extends React.Component {
         })
 
         features.forEach(marker => {
+
             const popup = new mapboxgl.Popup()
-                .setHTML('<div style="padding:0.3rem 0.3rem 0;text-align:center;">'
+                .setHTML('<div style="padding:0.3rem 0.3rem 0;text-align:center; color: black;">'
                 + '<h2 style="font-size:16px;margin:0 0 0.3rem;">' + marker.properties.name + '</h2>'
                 + '<p style="font-size:12px;margin:0;">Description: ' + marker.properties.description + '</p></div>')
           

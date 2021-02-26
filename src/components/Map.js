@@ -35,8 +35,7 @@ class Map extends React.Component {
                 },
                 'properties' : {
                     'name' : park.fullName,
-                    'description' : park.description,
-                    'image' : park.images
+                    'description' : park.description
                 }
             }
             features.push(feature)
