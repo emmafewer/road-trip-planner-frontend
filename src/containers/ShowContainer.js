@@ -1,25 +1,14 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import SidePanel from '../components/SidePanel'
+import ShowMap from '../components/ShowMap'
 
-class ShowContainer extends React.Component {
-
-    componentDidMount() {
-        
-    }
-
-    render () {
-        return (
-            <div className="showContainer">
-                <h1>You made it!!</h1>
-            </div>
-        );
-    }
-}
+function ShowContainer() {
+    return (
+      <div className="showContainer">
+          < SidePanel />
+          < ShowMap />
+      </div>
+    );
+  }
   
-const mapStateToProps = state => {
-    return {
-        state: state
-    }
-}
-
-export default connect(mapStateToProps)(ShowContainer)
+export default ShowContainer;
