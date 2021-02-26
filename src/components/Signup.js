@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import {signUserUp} from '../redux/actions/userActions'
 import { handleOnChange, setUser } from '../redux/actions/userActions'
 import { withRouter } from 'react-router-dom'
 

@@ -3,16 +3,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import mapboxgl from 'mapbox-gl';
+import { handleOnChange, setArea } from '../redux/actions/placesActions';
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-const useGeocoder = () => {
-  mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw';
-  var geocoder = new MapboxGeocoder({
-  accessToken: mapboxgl.accessToken,
-  types: 'country,region,place,postcode,locality,neighborhood'
-  });
+// const useGeocoder = () => {
+  // mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw';
+  // var geocoder = new MapboxGeocoder({
+  // accessToken: mapboxgl.accessToken,
+  // types: 'country,region,place,postcode,locality,neighborhood'
+  // });
    
-  geocoder.addTo('#geocoder');
-}
+  // geocoder.addTo('#geocoder');
+// }
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,21 +27,56 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HomeForm = () => {
+const HomeForm = (props) => {
   const classes = useStyles();
-
+  console.log(props.history)
   return (
     <div className="homeForm">
-      <div id="geocoder">{useGeocoder}</div>
-
-        {/* <form className={classes.root} noValidate autoComplete="off">
-        <TextField size="small" id="standard-basic" label="Start Location" variant="outlined"/>
-        <TextField size="small" id="filled-basic" label="End Location" variant="outlined" />
-        <Button variant="contained" color="secondary">View Places</Button>
+      {/* <div id="geocoder">{useGeocoder}</div> */}
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={(e) => {
+          e.preventDefault()
+          props.setArea(props.state.placesReducer.homeForm)
+          props.history.push('/places')}}
+          >
+        <TextField 
+          size="small" 
+          id="start" 
+          name="homeForm"
+          label="Start Location" 
+          variant="outlined"
+          onChange={props.handleOnChange}
+        />
+        <TextField 
+          size="small" 
+          id="end" 
+          name="homeForm"
+          label="End Location" 
+          ariant="outlined" 
+          onChange={props.handleOnChange}
+        />
+        <Button 
+          variant="contained" 
+          color="secondary"
+          type="submit"
+        >View Places</Button>
         
-        </form> */}
+        </form>
     </div>
   );
 }
 
-export default HomeForm
+const mapStateToProps = state => {
+  return {
+      state: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      handleOnChange: (input) => dispatch(handleOnChange(input)),
+      setArea: (area) => dispatch(setArea(area)),
+  }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeForm))
