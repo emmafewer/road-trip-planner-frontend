@@ -1,6 +1,6 @@
-export const handleOnChange = (e) => {
+export const placesHandleOnChange = (e) => {
     return {
-        type: 'FORM_INPUT',
+        type: 'PLACES_FORM_INPUT',
         key: e.target.id,
         value: e.target.value,
         formType: e.target.name

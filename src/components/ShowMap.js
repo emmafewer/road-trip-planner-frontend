@@ -7,20 +7,22 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxc
 
 class ShowMap extends React.Component {
 
-    getMap() {
-        const { parks } = this.props.state.placesReducer
-        const midLat = (parks.map(park => parseFloat(park.latitude)).reduce((a, b) => a + b, 0))/(parks.length)
-        const midLong = (parks.map(park => parseFloat(park.longitude)).reduce((a, b) => a + b, 0))/(parks.length)
-
-        let map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
-            zoom: 5,
-            center: [midLong, midLat],
-            scrollZoom: true,
-        });
-
-        this.getParkMarkers(map)
+    componentDidMount() {
+        if (this.props.state.placesReducer.parks !== undefined) {
+            const { parks } = this.props.state.placesReducer
+            const midLat = (parks.map(park => parseFloat(park.latitude)).reduce((a, b) => a + b, 0))/(parks.length)
+            const midLong = (parks.map(park => parseFloat(park.longitude)).reduce((a, b) => a + b, 0))/(parks.length)
+    
+            let map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
+                zoom: 5,
+                center: [midLong, midLat],
+                scrollZoom: true,
+            });
+    
+            this.getParkMarkers(map)
+        }
     }
 
     getParkMarkers = (map) => {
@@ -72,9 +74,9 @@ class ShowMap extends React.Component {
         return (
             <div className="showMap">
                 <div id="map" style={{width: "55vh", height: "50vh"}}>
-                    {this.props.state.placesReducer.parks !== undefined 
+                    {/* {this.props.state.placesReducer.parks !== undefined 
                     && this.getMap()
-                    }
+                    } */}
                 </div>
             </div>
 

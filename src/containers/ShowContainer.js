@@ -7,14 +7,18 @@ import { setFilteredParks } from '../redux/actions/placesActions';
 class ShowContainer extends React.Component {
     
     componentDidMount() {
-        fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
-        .then(resp => resp.json())
-        .then(parks => {
-            this.specifyArea(parks)
-        })
+        if (this.props.state.placesReducer.area) {
+            fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
+            .then(resp => resp.json())
+            .then(parks => {
+                this.specifyArea(parks)
+                // console.log(parks)
+            })
+        }
     }
 
     specifyArea = (parks) => {
+        console.log((parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude))
         let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
         let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
 
@@ -27,19 +31,25 @@ class ShowContainer extends React.Component {
         let highLong = (Math.max(startLong, endLong)+3).toString()
 
         let filteredParks = parks.data.filter(park => park.latitude >= lowLat && park.latitude <= highLat && park.longitude <= lowLong && park.longitude >= highLong)
-        
+      
         this.props.setFilteredParks(filteredParks)
     }
 
     render () {
         return (
             <div className="showContainer">
-                {/* {this.props.state.placesReducer.area !== undefined && this.getData()}
-                {this.props.state.placesReducer.parks !== undefined 
-                && <> */}
-                    < SidePanel />
-                    < ShowMap />
-                {/* </>} */}
+                { this.props.state.placesReducer.area
+                ? 
+                <div> {this.props.state.placesReducer.parks ?
+                    <div>
+                        < SidePanel />
+                        < ShowMap />
+                    </div> :
+                    null
+                } </div> :
+                null
+                }
+
             </div>
         );
     }

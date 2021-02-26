@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import mapboxgl from 'mapbox-gl';
-import { handleOnChange, setArea } from '../redux/actions/placesActions';
+import { placesHandleOnChange, setArea } from '../redux/actions/placesActions';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -43,15 +43,17 @@ const HomeForm = (props) => {
           name="homeForm"
           label="Start Location" 
           variant="outlined"
-          onChange={props.handleOnChange}
+          // value="Glacier National Park"
+          onChange={props.placesHandleOnChange}
         />
         <TextField 
           size="small" 
           id="end" 
           name="homeForm"
           label="End Location" 
-          ariant="outlined" 
-          onChange={props.handleOnChange}
+          variant="outlined" 
+          // value="Olympic National Park"
+          onChange={props.placesHandleOnChange}
         />
         <Button 
           variant="contained" 
@@ -72,8 +74,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      handleOnChange: (input) => dispatch(handleOnChange(input)),
-      setArea: (area) => dispatch(setArea(area)),
+    placesHandleOnChange: (input) => dispatch(placesHandleOnChange(input)),
+    setArea: (area) => dispatch(setArea(area)),
   }
 }
 
