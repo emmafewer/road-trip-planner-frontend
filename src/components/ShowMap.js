@@ -7,85 +7,64 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxc
 
 class ShowMap extends React.Component {
 
-    componentDidMount() {
+    getMap() {
+        const { parks } = this.props.state.placesReducer
+        const midLat = (parks.map(park => parseFloat(park.latitude)).reduce((a, b) => a + b, 0))/(parks.length)
+        const midLong = (parks.map(park => parseFloat(park.longitude)).reduce((a, b) => a + b, 0))/(parks.length)
+
         let map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
-            zoom: 3,
-            center: [-95.7129, 37.0902],
+            zoom: 5,
+            center: [midLong, midLat],
             scrollZoom: true,
         });
 
-        // fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
-        // .then(resp => resp.json())
-        // .then(parks => {
-        //     this.specifyArea(parks, map)
-        //     this.props.setFilteredParks(parks)
-        // })
+        this.getParkMarkers(map)
     }
 
-
-    specifyArea = (props, map) => {
-        debugger
-        // let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
-        // let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
-
-        // let endLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].latitude)
-        // let endLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].longitude)
-
-        // let lowLat = (Math.min(startLat, endLat)-3).toString()
-        // let highLat = (Math.max(startLat, endLat)+3).toString()
-        // let lowLong = (Math.min(startLong, endLong)-3).toString()
-        // let highLong = (Math.max(startLong, endLong)+3).toString()
-
-        // let filteredParks = parks.data.filter(park => park.latitude >= lowLat && park.latitude <= highLat && park.longitude <= lowLong && park.longitude >= highLong)
+    getParkMarkers = (map) => {
+        const { parks } = this.props.state.placesReducer
         
-        // const center = new mapboxgl.LngLat(((startLong+endLong)/2),((startLat+endLat)/2))
-        // map.setCenter(center)
-        // map.setZoom(5)
-        
-        // this.getParkMarkers(filteredParks, map)
-    }
-
-    getParkMarkers = (parks, map) => {
-        const features = []
-
-        parks.forEach( park => {
-            let feature = {
-                'type' : 'Feature',
-                'geometry' : {
-                    'type' : 'Point',
-                    'coordinates' : [ park.longitude, park.latitude ]
-                },
-                'properties' : {
-                    'name' : park.fullName,
-                    'description' : park.description
+        map.on('load', () => {
+            const features = []
+            parks.forEach( park => {
+                let feature = {
+                    'type' : 'Feature',
+                    'geometry' : {
+                        'type' : 'Point',
+                        'coordinates' : [ park.longitude, park.latitude ]
+                    },
+                    'properties' : {
+                        'name' : park.fullName,
+                        'description' : park.description
+                    }
                 }
-            }
-            features.push(feature)
+                features.push(feature)
+            })
+
+            map.addSource("locations", {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": features
+                }
+            })
+
+            features.forEach(marker => {
+
+                const popup = new mapboxgl.Popup()
+                    .setHTML('<div style="padding:0.3rem 0.3rem 0;text-align:center; color: black;">'
+                    + '<h2 style="font-size:16px;margin:0 0 0.3rem;">' + marker.properties.name + '</h2>'
+                    + '<p style="font-size:12px;margin:0;">Description: ' + marker.properties.description + '</p></div>')
+            
+
+                new mapboxgl.Marker()
+                    .setLngLat(marker.geometry.coordinates)
+                    .setPopup(popup)
+                    .addTo(map);
+            });
         })
-
-        map.addSource("locations", {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features": features
-            }
-        })
-
-        features.forEach(marker => {
-
-            const popup = new mapboxgl.Popup()
-                .setHTML('<div style="padding:0.3rem 0.3rem 0;text-align:center; color: black;">'
-                + '<h2 style="font-size:16px;margin:0 0 0.3rem;">' + marker.properties.name + '</h2>'
-                + '<p style="font-size:12px;margin:0;">Description: ' + marker.properties.description + '</p></div>')
-          
-
-            new mapboxgl.Marker()
-                .setLngLat(marker.geometry.coordinates)
-                .setPopup(popup)
-                .addTo(map);
-        });
 
     }
 
@@ -93,6 +72,9 @@ class ShowMap extends React.Component {
         return (
             <div className="showMap">
                 <div id="map" style={{width: "55vh", height: "50vh"}}>
+                    {this.props.state.placesReducer.parks !== undefined 
+                    && this.getMap()
+                    }
                 </div>
             </div>
 
@@ -105,12 +87,6 @@ const mapStateToProps = state => {
         state: state
     }
 }
-  
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         setFilteredParks: (parks) => dispatch(setFilteredParks(parks))
-//     }
-// }
   
 
 export default connect(mapStateToProps)(ShowMap)

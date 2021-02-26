@@ -7,27 +7,39 @@ import { setFilteredParks } from '../redux/actions/placesActions';
 class ShowContainer extends React.Component {
     
     componentDidMount() {
-        // let map = new mapboxgl.Map({
-        //     container: 'map',
-        //     style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
-        //     zoom: 3,
-        //     center: [-95.7129, 37.0902],
-        //     scrollZoom: true,
-        // });
-
         fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
         .then(resp => resp.json())
         .then(parks => {
-            // this.specifyArea(parks, map)
-            this.props.setFilteredParks(parks)
+            this.specifyArea(parks)
         })
+    }
+
+    specifyArea = (parks) => {
+        let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
+        let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
+
+        let endLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].latitude)
+        let endLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.end)[0].longitude)
+
+        let lowLat = (Math.min(startLat, endLat)-3).toString()
+        let highLat = (Math.max(startLat, endLat)+3).toString()
+        let lowLong = (Math.min(startLong, endLong)-3).toString()
+        let highLong = (Math.max(startLong, endLong)+3).toString()
+
+        let filteredParks = parks.data.filter(park => park.latitude >= lowLat && park.latitude <= highLat && park.longitude <= lowLong && park.longitude >= highLong)
+        
+        this.props.setFilteredParks(filteredParks)
     }
 
     render () {
         return (
             <div className="showContainer">
-                < SidePanel />
-                < ShowMap />
+                {/* {this.props.state.placesReducer.area !== undefined && this.getData()}
+                {this.props.state.placesReducer.parks !== undefined 
+                && <> */}
+                    < SidePanel />
+                    < ShowMap />
+                {/* </>} */}
             </div>
         );
     }

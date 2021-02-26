@@ -5,8 +5,9 @@ import ParkSideCard from './ParkSideCard'
 
 const getParks = (props) => {
     if (props.state.placesReducer.parks) {
+      
         const { parks } = props.state.placesReducer
-        parks.data.map(park => < ParkSideCard park={park}/>)
+        // parks.data.map(park => < ParkSideCard park={park}/>)
     }
 }
 
