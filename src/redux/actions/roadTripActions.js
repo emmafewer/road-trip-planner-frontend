@@ -1,9 +1,7 @@
 export const roadTripHandleOnChange = (e) => {
     return {
         type: 'NEW_TRIP_INPUT',
-        key: e.target.id,
-        value: e.target.value,
-        formType: e.target.name
+        value: e.target.value
     }
 }
 

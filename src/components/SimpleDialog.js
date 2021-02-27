@@ -9,10 +9,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
+import { roadTripHandleOnChange } from '../redux/actions/roadTripActions';
+import {connect} from 'react-redux'
 
 const emails = ['Utah 5 Days 5 NPs', 'West Coast Dreamin'];
 
-export default function SimpleDialog(props) {
+const SimpleDialog = (props) => {
   const { onClose, selectedValue, open } = props;
   // const [newTrip, setNewTrip] = React.useState(null);
 
@@ -24,7 +26,8 @@ export default function SimpleDialog(props) {
     onClose(value);
   };
 
-  const createRoadTrip = (e) => {
+  const createRoadTrip = (props) => {
+    console.log(props.state.roadTripReducer.newTripInput)
     debugger
   }
 
@@ -45,9 +48,10 @@ export default function SimpleDialog(props) {
             id="name"
             label="New Road Trip"
             type="trip"
+            onChange={props.roadTripHandleOnChange}
             fullWidth
           />
-          <ListItemAvatar onClick={createRoadTrip}>
+          <ListItemAvatar onClick={() => createRoadTrip(props)}>
             <Avatar>
               <AddIcon />
             </Avatar>
@@ -63,3 +67,17 @@ export default function SimpleDialog(props) {
 //     open: PropTypes.bool.isRequired,
 //     selectedValue: PropTypes.string.isRequired,
 // };
+
+const mapStateToProps = state => {
+  return {
+      state: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    roadTripHandleOnChange: (input) => dispatch(roadTripHandleOnChange(input))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleDialog)

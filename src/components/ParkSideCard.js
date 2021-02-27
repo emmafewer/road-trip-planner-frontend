@@ -111,7 +111,7 @@ export default function ParkSideCard(props) {
             onClick={handleClickOpen}>
           <AddIcon />
         </IconButton>
-        <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+        <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} park={props.park}/>
         <IconButton aria-label="website" onClick={() => goToWebsite(props)}>
           <OpenInNewIcon />
         </IconButton>
