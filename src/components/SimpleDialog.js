@@ -22,10 +22,6 @@ const SimpleDialog = (props) => {
     onClose();
   };
 
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
-
   const createRoadTrip = (props) => {
     if (props.state.roadTripReducer.newTripInput === ''){
       alert('Please give your road trip a name.')
@@ -38,34 +34,41 @@ const SimpleDialog = (props) => {
         body: JSON.stringify({road_trip: road_trip})
       })
       .then(res => res.json())
-      // .then(data => handleListItemClick(data))
+      .then(roadtrip => createPark(roadtrip, props))
     }
   }
 
-  // const getRoadTripList = () => {
-  //   fetch(`${BASE_URL}/road_trips`,{
-  //     method: 'GET',
-  //     headers : {Authorization: `Bearer ${localStorage.token}`}, 
-  //   })
-  //   .then(res => res.json())
-  //   .then(trips => renderList(trips))
-  // }
+  const createPark = (roadtrip, props) => {
+    fetch(`${BASE_URL}/parks`,{
+      method: 'POST',
+      headers : {'content-type':'application/json', Authorization: `Bearer ${localStorage.token}`}, 
+      body: JSON.stringify({park: props.park})
+    })
+    .then(res => res.json())
+    .then(park => createParkSave(park, roadtrip))
+  }
 
-  // const renderList = (trips) => {
-  //   debugger
-  //   {trips.map((trip) => (
-  //     <ListItem button onClick={() => handleListItemClick(trip)} key={trip}>
-  //       <ListItemText primary={trip.name} />
-  //     </ListItem>
-  //   ))}
-  // }
+  const createParkSave = (park, roadtrip) => {
+    fetch(`${BASE_URL}/park_saves`,{
+      method: 'POST',
+      headers : {'content-type':'application/json', Authorization: `Bearer ${localStorage.token}`}, 
+      body: JSON.stringify({park_save: {road_trip_id: roadtrip.id, park_id: park.id}})
+    })
+    .then(res => res.json())
+    .then(save => console.log(save))
+  }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
       <DialogTitle id="simple-dialog-title">Add to Road Trip</DialogTitle>
       <List>
-        {props.state.roadTripReducer.trips.map((trip) => (
-          <ListItem button onClick={() => handleListItemClick(trip.name)} key={trip.name}>
+        {props.state.roadTripReducer.trips &&
+        props.state.roadTripReducer.trips.map((trip) => (
+          <ListItem button onClick={() => {
+            createPark(trip, props)
+            handleClose()}}
+            key={trip.name}
+          >
             <ListItemText primary={trip.name} />
           </ListItem>
         ))}
@@ -82,7 +85,7 @@ const SimpleDialog = (props) => {
           />
           <ListItemAvatar onClick={() => {
             createRoadTrip(props)
-            handleListItemClick(props.state.roadTripReducer.newTripInput)}}>
+            handleClose()}}>
             <Avatar>
               <AddIcon />
             </Avatar>
