@@ -7,21 +7,16 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import SimpleDialog from './SimpleDialog'
+import { setRoadTripList } from '../redux/actions/roadTripActions';
+import {connect} from 'react-redux'
 
-const emails = ['Utah 5 Days 5 NPs', 'West Coast Dreamin'];
+const BASE_URL = 'http://localhost:4000'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,19 +38,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ParkSideCard(props) {
+const ParkSideCard = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (props) => {
     setOpen(true);
+
+    fetch(`${BASE_URL}/users/${props.state.userReducer.user.id}`,{
+        method: 'GET',
+        headers : {Authorization: `Bearer ${localStorage.token}`}, 
+      })
+      .then(res => res.json())
+      .then(user => props.setRoadTripList(user.road_trips))
   };
 
-  const handleClose = (value) => {
+  const handleClose = () => {
     setOpen(false);
-    setSelectedValue(value);
   };
 
   const handleExpandClick = () => {
@@ -108,10 +108,10 @@ export default function ParkSideCard(props) {
             edge="start" 
             color="inherit" 
             id="add"
-            onClick={handleClickOpen}>
+            onClick={() => handleClickOpen(props)}>
           <AddIcon />
         </IconButton>
-        <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} park={props.park}/>
+        <SimpleDialog open={open} onClose={handleClose} park={props.park}/>
         <IconButton aria-label="website" onClick={() => goToWebsite(props)}>
           <OpenInNewIcon />
         </IconButton>
@@ -139,3 +139,17 @@ export default function ParkSideCard(props) {
     </Card>
   );
 }
+
+const mapStateToProps = state => {
+    return {
+        state: state
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      setRoadTripList: (trips) => dispatch(setRoadTripList(trips))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ParkSideCard)

@@ -5,9 +5,9 @@ export const roadTripHandleOnChange = (e) => {
     }
 }
 
-export const setNewTrip = (trip) => {
+export const setRoadTripList = (trips) => {
     return {
-        type: 'SET_NEW_TRIP',
-        newTrip: trip
+        type: 'SET_LIST',
+        trips: trips
     }
 }

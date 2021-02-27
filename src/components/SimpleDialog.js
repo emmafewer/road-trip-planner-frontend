@@ -12,15 +12,14 @@ import TextField from '@material-ui/core/TextField';
 import { roadTripHandleOnChange } from '../redux/actions/roadTripActions';
 import {connect} from 'react-redux'
 
-const emails = ['Utah 5 Days 5 NPs', 'West Coast Dreamin'];
+// const emails = ['Utah 5 Days 5 NPs', 'West Coast Dreamin'];
 const BASE_URL = 'http://localhost:4000'
 
 const SimpleDialog = (props) => {
-  const { onClose, selectedValue, open } = props;
-  // const [newTrip, setNewTrip] = React.useState(null);
+  const { onClose, open } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   const handleListItemClick = (value) => {
@@ -39,19 +38,35 @@ const SimpleDialog = (props) => {
         body: JSON.stringify({road_trip: road_trip})
       })
       .then(res => res.json())
-      .then(data => {
-        console.log(data)
-      })
+      // .then(data => handleListItemClick(data))
     }
   }
+
+  // const getRoadTripList = () => {
+  //   fetch(`${BASE_URL}/road_trips`,{
+  //     method: 'GET',
+  //     headers : {Authorization: `Bearer ${localStorage.token}`}, 
+  //   })
+  //   .then(res => res.json())
+  //   .then(trips => renderList(trips))
+  // }
+
+  // const renderList = (trips) => {
+  //   debugger
+  //   {trips.map((trip) => (
+  //     <ListItem button onClick={() => handleListItemClick(trip)} key={trip}>
+  //       <ListItemText primary={trip.name} />
+  //     </ListItem>
+  //   ))}
+  // }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
       <DialogTitle id="simple-dialog-title">Add to Road Trip</DialogTitle>
       <List>
-        {emails.map((email) => (
-          <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-            <ListItemText primary={email} />
+        {props.state.roadTripReducer.trips.map((trip) => (
+          <ListItem button onClick={() => handleListItemClick(trip.name)} key={trip.name}>
+            <ListItemText primary={trip.name} />
           </ListItem>
         ))}
 
@@ -65,7 +80,9 @@ const SimpleDialog = (props) => {
             onChange={props.roadTripHandleOnChange}
             fullWidth
           />
-          <ListItemAvatar onClick={() => createRoadTrip(props)}>
+          <ListItemAvatar onClick={() => {
+            createRoadTrip(props)
+            handleListItemClick(props.state.roadTripReducer.newTripInput)}}>
             <Avatar>
               <AddIcon />
             </Avatar>
