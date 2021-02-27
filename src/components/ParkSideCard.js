@@ -15,7 +15,13 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AddIcon from '@material-ui/icons/Add';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import SimpleDialog from './SimpleDialog'
 
+const emails = ['Utah 5 Days 5 NPs', 'West Coast Dreamin'];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +46,17 @@ const useStyles = makeStyles((theme) => ({
 export default function ParkSideCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -59,7 +76,11 @@ export default function ParkSideCard(props) {
     } else {
       return ""      
     }
-}
+  }
+
+  const goToWebsite = (props) => {
+      return alert(props.park.url)
+  }
 
   return (
     <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}}>
@@ -82,11 +103,17 @@ export default function ParkSideCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton 
+            aria-label="add to road trip"
+            edge="start" 
+            color="inherit" 
+            id="add"
+            onClick={handleClickOpen}>
+          <AddIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+        <IconButton aria-label="website" onClick={() => goToWebsite(props)}>
+          <OpenInNewIcon />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
