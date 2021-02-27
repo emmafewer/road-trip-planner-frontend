@@ -1,23 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import ParkSideCard from './ParkSideCard'
-
-
-// const getParks = (props) => {
-//     if (props.state.placesReducer.parks) {
-      
-//         const { parks } = props.state.placesReducer
-//         parks.map(park => < ParkSideCard park={park}/>)
-//     }
-// }
+import { Container } from '@material-ui/core'
 
 const SidePanel = (props) => {
     return (
       <div className="sidePanel">
-          <h1>You Made it to SidePanel!</h1>
-          {props.state.placesReducer.parks !== undefined
-          &&
-          props.state.placesReducer.parks.map(park => < ParkSideCard park={park}/>)}
+          <Container id="sidePanelContainer" >
+            {props.state.placesReducer.parks
+            &&
+            props.state.placesReducer.parks.map(park => < ParkSideCard park={park}/>)}
+         </Container>
       </div>
     );
 }

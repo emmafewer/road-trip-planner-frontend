@@ -86,12 +86,20 @@ body {
   display:inline-block;
   width: 40%;
   float: left;
+  height: 80vh;
 }
 
 .showMap {
   display:inline-block;
   width: 60%;
+  padding-top: 10em;
 }
+
+#sidePanelContainer {
+  overflow-y: scroll; 
+  height: 100%
+}
+
 
 
 

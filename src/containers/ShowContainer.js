@@ -12,13 +12,11 @@ class ShowContainer extends React.Component {
             .then(resp => resp.json())
             .then(parks => {
                 this.specifyArea(parks)
-                // console.log(parks)
             })
         }
     }
 
     specifyArea = (parks) => {
-        console.log((parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude))
         let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
         let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
 
@@ -31,7 +29,6 @@ class ShowContainer extends React.Component {
         let highLong = (Math.max(startLong, endLong)+3).toString()
 
         let filteredParks = parks.data.filter(park => park.latitude >= lowLat && park.latitude <= highLat && park.longitude <= lowLong && park.longitude >= highLong)
-      
         this.props.setFilteredParks(filteredParks)
     }
 

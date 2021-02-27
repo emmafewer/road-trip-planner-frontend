@@ -1,7 +1,7 @@
 const initialState = {
     homeForm: {},
     area: null,
-    // parks: []
+    parks: null
 }
 
 const placesReducer = (state = initialState, action) => {

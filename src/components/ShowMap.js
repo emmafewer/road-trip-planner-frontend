@@ -8,7 +8,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxc
 class ShowMap extends React.Component {
 
     componentDidMount() {
-        if (this.props.state.placesReducer.parks !== undefined) {
+        if (this.props.state.placesReducer.parks) {
             const { parks } = this.props.state.placesReducer
             const midLat = (parks.map(park => parseFloat(park.latitude)).reduce((a, b) => a + b, 0))/(parks.length)
             const midLong = (parks.map(park => parseFloat(park.longitude)).reduce((a, b) => a + b, 0))/(parks.length)
@@ -73,10 +73,7 @@ class ShowMap extends React.Component {
     render () {
         return (
             <div className="showMap">
-                <div id="map" style={{width: "55vh", height: "50vh"}}>
-                    {/* {this.props.state.placesReducer.parks !== undefined 
-                    && this.getMap()
-                    } */}
+                <div id="map" style={{maxHeight: '100%', maxWidth: '100%'}}>
                 </div>
             </div>
 

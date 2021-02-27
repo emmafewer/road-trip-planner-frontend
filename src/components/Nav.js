@@ -57,7 +57,7 @@ const Nav = (props) => {
     <div >
       <AppBar position="static" className={classes.root}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} onClick={() => handleClick('/')}>
             Trip Planner
           </Typography>
             <div className={classes.rightToolbar}>
