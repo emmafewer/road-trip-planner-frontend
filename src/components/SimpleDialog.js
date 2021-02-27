@@ -13,6 +13,7 @@ import { roadTripHandleOnChange } from '../redux/actions/roadTripActions';
 import {connect} from 'react-redux'
 
 const emails = ['Utah 5 Days 5 NPs', 'West Coast Dreamin'];
+const BASE_URL = 'http://localhost:4000'
 
 const SimpleDialog = (props) => {
   const { onClose, selectedValue, open } = props;
@@ -27,8 +28,21 @@ const SimpleDialog = (props) => {
   };
 
   const createRoadTrip = (props) => {
-    console.log(props.state.roadTripReducer.newTripInput)
-    debugger
+    if (props.state.roadTripReducer.newTripInput === ''){
+      alert('Please give your road trip a name.')
+    } else {
+      const road_trip = {name: props.state.roadTripReducer.newTripInput, user_id: props.state.userReducer.user.id}
+
+      fetch(`${BASE_URL}/road_trips`,{
+        method: 'POST',
+        headers : {'content-type':'application/json', Authorization: `Bearer ${localStorage.token}`}, 
+        body: JSON.stringify({road_trip: road_trip})
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+    }
   }
 
   return (
