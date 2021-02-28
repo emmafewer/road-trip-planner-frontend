@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import mapboxgl from 'mapbox-gl'
-import { setFilteredParks } from '../redux/actions/placesActions';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw'
 
@@ -72,7 +71,7 @@ class ShowMap extends React.Component {
 
     render () {
         return (
-            <div className="showMap">
+            <div >
                 <div id="map" style={{maxHeight: '100%', maxWidth: '100%'}}>
                 </div>
             </div>

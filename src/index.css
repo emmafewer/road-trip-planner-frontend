@@ -10,6 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
+  color: white;
 }
 
 /* code { */
@@ -78,28 +79,43 @@ body {
 .showContainer {
   color: white;
   height: 80vh;
-  width: 120vh;
+  width: 160vh;
   padding-top: 3em;
 }
 
 .sidePanel {
   display:inline-block;
-  width: 40%;
+  width: 30%;
   float: left;
   height: 80vh;
+  padding-right: 2em;
 }
 
-.showMap {
+.mapContainer {
   display:inline-block;
   width: 60%;
-  padding-top: 10em;
+  padding-left: 1em;
 }
 
 #sidePanelContainer {
   overflow-y: scroll; 
-  height: 100%
+  height: 100%;
+  /* padding-right: 1em; */
 }
 
+.MapNav {
+  background-color: white;
+  height: 10vh;
+  width: 100%;
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  color: black;
+}
+
+.campAvailability {
+
+}
 
 
 

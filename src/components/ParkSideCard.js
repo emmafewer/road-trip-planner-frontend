@@ -20,7 +20,7 @@ const BASE_URL = 'http://localhost:4000'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 500,
   },
   media: {
     height: 0,

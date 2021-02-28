@@ -1,8 +1,10 @@
 import React from 'react'
 import SidePanel from '../components/SidePanel'
-import ShowMap from '../components/ShowMap'
+import MapContainer from './MapContainer'
 import {connect} from 'react-redux'
 import { setFilteredParks } from '../redux/actions/placesActions';
+
+const BASE_URL = 'http://localhost:4000'
 
 class ShowContainer extends React.Component {
     
@@ -10,13 +12,21 @@ class ShowContainer extends React.Component {
         if (this.props.state.placesReducer.area) {
             fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
             .then(resp => resp.json())
-            .then(parks => {
-                this.specifyArea(parks)
-            })
+            .then(parks => this.getCampgrounds(parks))
         }
     }
 
-    specifyArea = (parks) => {
+    getCampgrounds = (parks) => {
+        fetch(`${BASE_URL}/campgrounds`, {
+            method: 'GET',
+            headers : {Authorization: `Bearer ${localStorage.token}`}, 
+          })
+          .then(res => res.json())
+          .then(campgrounds => this.specifyArea(parks, campgrounds))
+    }
+
+    specifyArea = (parks, campgrounds) => {
+        debugger
         let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
         let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
 
@@ -40,7 +50,7 @@ class ShowContainer extends React.Component {
                 <div> {this.props.state.placesReducer.parks ?
                     <div>
                         < SidePanel />
-                        < ShowMap />
+                        < MapContainer />
                     </div> :
                     null
                 } </div> :
