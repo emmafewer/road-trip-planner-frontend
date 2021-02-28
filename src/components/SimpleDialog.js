@@ -12,7 +12,6 @@ import TextField from '@material-ui/core/TextField';
 import { roadTripHandleOnChange } from '../redux/actions/roadTripActions';
 import {connect} from 'react-redux'
 
-// const emails = ['Utah 5 Days 5 NPs', 'West Coast Dreamin'];
 const BASE_URL = 'http://localhost:4000'
 
 const SimpleDialog = (props) => {
@@ -49,13 +48,13 @@ const SimpleDialog = (props) => {
   }
 
   const createParkSave = (park, roadtrip) => {
-    fetch(`${BASE_URL}/park_saves`,{
+    fetch(`${BASE_URL}/park_books`,{
       method: 'POST',
       headers : {'content-type':'application/json', Authorization: `Bearer ${localStorage.token}`}, 
-      body: JSON.stringify({park_save: {road_trip_id: roadtrip.id, park_id: park.id}})
+      body: JSON.stringify({park_book: {road_trip_id: roadtrip.id, park_id: park.id}})
     })
     .then(res => res.json())
-    .then(save => console.log(save))
+    // .then(save => console.log(save))
   }
 
   return (
