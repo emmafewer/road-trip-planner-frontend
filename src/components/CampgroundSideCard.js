@@ -63,7 +63,7 @@ const CampgroundSideCard = (props) => {
   };
 
   const getImageUrl = (props) => {
-      if (props.campground.images[0].url) {
+      if (props.campground.images[0]) {
         return props.campground.images[0].url
       } else {
         return "https://lh3.googleusercontent.com/proxy/9DYTFvUQeKcswSHh3U8poRVsvO2vPFZAHJXaTHAih0BAXtLXheEFEE7V0dSbqW0hsgcvecO90mbDR_um785KtDjX9C3F3s45mG7Z1HhCoZ_X1YXaRkDPXqU"      
@@ -71,7 +71,7 @@ const CampgroundSideCard = (props) => {
   }
 
   const getImageDesc = (props) => {
-    if (props.campground.images[0].caption) {
+    if (props.campground.images[0]) {
       return props.campground.images[0].caption
     } else {
       return ""      
@@ -81,7 +81,7 @@ const CampgroundSideCard = (props) => {
   const goToWebsite = (props) => {
       return alert(props.campground.url)
   }
-  
+
   return (
     <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}}>
       <CardHeader
