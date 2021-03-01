@@ -8,6 +8,7 @@ import HomeContainer from './containers/HomeContainer'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import {setUser} from './redux/actions/userActions'
 import ShowContainer from './containers/ShowContainer'
+import MyRoadTrips from './components/MyRoadTrips'
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -42,6 +43,7 @@ class App extends React.Component {
             <Route exact path='/' render={() => < HomeContainer />} />
             <Route exact path='/places' render={() => < ShowContainer />} />
             <Route exact path='/profile' render={() => < Profile />}/>
+            <Route exact path='/road_trips' render={() => < MyRoadTrips />}/>
           </>
           : 
           <>

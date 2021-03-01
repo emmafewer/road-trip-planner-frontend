@@ -2,9 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { withRouter } from 'react-router-dom'
 
+const goToRoadTrips = (props) => {
+    props.history.push('/road_trips')
+}
 
-const MapNavBar = () => {
+const MapNavBar = (props) => {
     return (
         <div className="MapNav">
           
@@ -36,6 +40,7 @@ const MapNavBar = () => {
             variant="contained" 
             color="primary"
             type="submit"
+            onClick={() => goToRoadTrips(props)}
             >
                 Go To Roadtrip
             </Button>
@@ -44,4 +49,4 @@ const MapNavBar = () => {
     )
 }
 
-export default MapNavBar
+export default withRouter(MapNavBar)
