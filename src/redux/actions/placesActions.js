@@ -21,3 +21,10 @@ export const setFilteredParks = (places) => {
     }
 }
 
+export const setActivePanel = (e) => {
+    return {
+        type: 'SET_ACTIVE_PANEL',
+        active: e.target.innerHTML
+    }
+}
+

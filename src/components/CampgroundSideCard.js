@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ParkSideCard = (props) => {
+const CampgroundSideCard = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -63,25 +63,25 @@ const ParkSideCard = (props) => {
   };
 
   const getImageUrl = (props) => {
-      if (props.park.images[0].url) {
-        return props.park.images[0].url
+      if (props.campground.images[0].url) {
+        return props.campground.images[0].url
       } else {
         return "https://lh3.googleusercontent.com/proxy/9DYTFvUQeKcswSHh3U8poRVsvO2vPFZAHJXaTHAih0BAXtLXheEFEE7V0dSbqW0hsgcvecO90mbDR_um785KtDjX9C3F3s45mG7Z1HhCoZ_X1YXaRkDPXqU"      
       }
   }
 
   const getImageDesc = (props) => {
-    if (props.park.images[0].caption) {
-      return props.park.images[0].caption
+    if (props.campground.images[0].caption) {
+      return props.campground.images[0].caption
     } else {
       return ""      
     }
   }
 
   const goToWebsite = (props) => {
-      return alert(props.park.url)
+      return alert(props.campground.url)
   }
-
+  
   return (
     <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}}>
       <CardHeader
@@ -90,7 +90,7 @@ const ParkSideCard = (props) => {
         //     <MoreVertIcon />
         //   </IconButton>
         // }
-        title={props.park.fullName}
+        title={props.campground.name}
         // subheader="September 14, 2016"
       />
       <CardMedia
@@ -111,7 +111,7 @@ const ParkSideCard = (props) => {
             onClick={() => handleClickOpen(props)}>
           <AddIcon />
         </IconButton>
-        <SimpleDialog open={open} onClose={handleClose} campground={props.campground}/>
+        <SimpleDialog open={open} onClose={handleClose} park={props.park}/>
         <IconButton aria-label="website" onClick={() => goToWebsite(props)}>
           <OpenInNewIcon />
         </IconButton>
@@ -129,7 +129,7 @@ const ParkSideCard = (props) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            {props.park.description}
+            {props.campground.description}
           </Typography>
           <Typography paragraph>
             Can put little emoticons of the activities here as a stretch goal.
@@ -152,4 +152,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ParkSideCard)
+export default connect(mapStateToProps, mapDispatchToProps)(CampgroundSideCard)

@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import RSidePanel from '../roadtrip/RSidePanel'
-import RMapContainer from '../roadtrip/RMapContainer'
+import RMapNavBar from '../roadtrip/RMapNavBar'
+import RShowMap from '../roadtrip/RShowMap'
 
 
 
@@ -15,7 +16,10 @@ class ShowContainer extends React.Component {
                 &&
                 <>
                     < RSidePanel />
-                    < RMapContainer />
+                    <div className="rMapContainer">
+                        < RMapNavBar />
+                        {/* < RShowMap /> */}
+                    </div>
                 </>
                 }
 

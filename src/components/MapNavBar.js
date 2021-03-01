@@ -39,7 +39,6 @@ const MapNavBar = (props) => {
             <Button 
             variant="contained" 
             color="primary"
-            type="submit"
             onClick={() => goToRoadTrips(props)}
             >
                 Go To Roadtrip
