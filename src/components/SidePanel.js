@@ -7,9 +7,9 @@ const SidePanel = (props) => {
     return (
       <div className="sidePanel">
           <Container id="sidePanelContainer" >
-            {props.state.placesReducer.parks
+            {props.state.placesReducer.places.parks
             &&
-            props.state.placesReducer.parks.map(park => < ParkSideCard park={park}/>)}
+            props.state.placesReducer.places.parks.map(park => < ParkSideCard park={park}/>)}
          </Container>
       </div>
     );

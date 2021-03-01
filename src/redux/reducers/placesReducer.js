@@ -1,7 +1,7 @@
 const initialState = {
     homeForm: {},
     area: null,
-    parks: null
+    places: null
 }
 
 const placesReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const placesReducer = (state = initialState, action) => {
             }
         case 'SET_FILTERED_PARKS':
             return {
-                ...state, parks: action.parks
+                ...state, places: action.places
             }
         default:
             return state

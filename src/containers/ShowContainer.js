@@ -17,16 +17,12 @@ class ShowContainer extends React.Component {
     }
 
     getCampgrounds = (parks) => {
-        fetch(`${BASE_URL}/campgrounds`, {
-            method: 'GET',
-            headers : {Authorization: `Bearer ${localStorage.token}`}, 
-          })
+        fetch("https://developer.nps.gov/api/v1/campgrounds?limit=600&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
           .then(res => res.json())
           .then(campgrounds => this.specifyArea(parks, campgrounds))
     }
 
     specifyArea = (parks, campgrounds) => {
-        debugger
         let startLat = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].latitude)
         let startLong = parseInt(parks.data.filter(park => park.fullName === this.props.state.placesReducer.area.start)[0].longitude)
 
@@ -39,7 +35,11 @@ class ShowContainer extends React.Component {
         let highLong = (Math.max(startLong, endLong)+3).toString()
 
         let filteredParks = parks.data.filter(park => park.latitude >= lowLat && park.latitude <= highLat && park.longitude <= lowLong && park.longitude >= highLong)
-        this.props.setFilteredParks(filteredParks)
+        let filteredParkCodes = filteredParks.map(park => park.parkCode)
+        let filteredCampgrounds = campgrounds.data.filter(camp => filteredParkCodes.includes(camp.parkCode))
+
+    
+        this.props.setFilteredParks({parks: filteredParks, campgrounds: filteredCampgrounds})
     }
 
     render () {
@@ -47,7 +47,7 @@ class ShowContainer extends React.Component {
             <div className="showContainer">
                 { this.props.state.placesReducer.area
                 ? 
-                <div> {this.props.state.placesReducer.parks ?
+                <div> {this.props.state.placesReducer.places ?
                     <div>
                         < SidePanel />
                         < MapContainer />
@@ -70,7 +70,7 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = (dispatch) => {
     return {
-        setFilteredParks: (parks) => dispatch(setFilteredParks(parks))
+        setFilteredParks: (places) => dispatch(setFilteredParks(places))
     }
 }
   
