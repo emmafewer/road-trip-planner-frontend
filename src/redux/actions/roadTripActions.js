@@ -11,3 +11,10 @@ export const setRoadTripList = (trips) => {
         trips: trips
     }
 }
+
+export const setTrip = (trip) => {
+    return {
+        type: 'SET_TRIP',
+        trip: trip
+    }
+}

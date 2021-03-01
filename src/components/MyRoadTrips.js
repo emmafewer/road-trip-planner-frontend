@@ -26,6 +26,7 @@ class MyRoadTrips extends React.Component {
     // }
 
     render () {
+        console.log(this.props.state.roadTripReducer.trips, this.props.state.userReducer.user)
         return (
             <div className="myRoadTrips">
                 {this.props.state.roadTripReducer.trips

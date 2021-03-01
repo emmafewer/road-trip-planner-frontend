@@ -1,6 +1,7 @@
 const initialState = {
     newTripInput: null,
     trips: null,
+    trip: null,
 }
 
 const roadTripReducer = (state = initialState, action) => {
@@ -12,6 +13,10 @@ const roadTripReducer = (state = initialState, action) => {
         case 'SET_LIST':
             return {
                 ...state, trips: action.trips
+            }
+        case 'SET_TRIP':
+            return {
+                ...state, trip: action.trip
             }
         default:
             return state
