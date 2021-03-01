@@ -50,7 +50,7 @@ const CampgroundDialog = (props) => {
     fetch(`${BASE_URL}/campground_books`,{
       method: 'POST',
       headers : {'content-type':'application/json', Authorization: `Bearer ${localStorage.token}`}, 
-      body: JSON.stringify({campground_book: {road_trip_id: roadtrip.id, campground_id: campground.id}})
+      body: JSON.stringify({road_trip_id: roadtrip.id, campground_id: campground.id})
     })
     .then(res => res.json())
     // .then(save => console.log(save))
@@ -93,12 +93,6 @@ const CampgroundDialog = (props) => {
     </Dialog>
   );
 }
-
-// SimpleDialog.propTypes = {
-//     onClose: PropTypes.func.isRequired,
-//     open: PropTypes.bool.isRequired,
-//     selectedValue: PropTypes.string.isRequired,
-// };
 
 const mapStateToProps = state => {
   return {

@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import SimpleDialog from './SimpleDialog'
+import CampgroundDialog from './CampgroundDialog'
 import { setRoadTripList } from '../redux/actions/roadTripActions';
 import {connect} from 'react-redux'
 
@@ -111,7 +111,7 @@ const CampgroundSideCard = (props) => {
             onClick={() => handleClickOpen(props)}>
           <AddIcon />
         </IconButton>
-        <SimpleDialog open={open} onClose={handleClose} park={props.park}/>
+        <CampgroundDialog open={open} onClose={handleClose} campground={props.campground}/>
         <IconButton aria-label="website" onClick={() => goToWebsite(props)}>
           <OpenInNewIcon />
         </IconButton>

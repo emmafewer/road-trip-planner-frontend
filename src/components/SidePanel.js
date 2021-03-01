@@ -10,19 +10,6 @@ const SidePanel = (props) => {
     return (
       <div className="sidePanel">
           <Container id="sidePanelContainer" >
-
-          {/* { this.props.state.placesReducer.area
-                ? 
-                <div> {this.props.state.placesReducer.places ?
-                    <div>
-                        < SidePanel />
-                        < MapContainer />
-                    </div> :
-                    null
-                } </div> :
-                null
-                } */}
-
             <div>
                 <Button 
                 variant="contained" 
