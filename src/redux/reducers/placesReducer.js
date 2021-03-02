@@ -1,5 +1,6 @@
 const initialState = {
-    homeForm: {},
+    start: null,
+    end: null,
     area: null,
     places: null,
     active: "Parks",
@@ -8,9 +9,13 @@ const initialState = {
 
 const placesReducer = (state = initialState, action) => {
     switch(action.type) {
-        case 'PLACES_FORM_INPUT':
+        case 'START_FORM_INPUT':
             return {
-                ...state, [action.formType]: {...state[action.formType], [action.key]: action.value}
+                ...state, start: action.start
+            }
+        case 'END_FORM_INPUT':
+            return {
+                ...state, end: action.end
             }
         case 'SET_AREA':
             return {

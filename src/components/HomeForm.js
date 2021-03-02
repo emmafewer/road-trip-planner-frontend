@@ -3,21 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import mapboxgl from 'mapbox-gl';
-import { placesHandleOnChange, setArea } from '../redux/actions/placesActions';
+import { placesHandleOnChange, setArea, startHandleOnChange, endHandleOnChange } from '../redux/actions/placesActions';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-// const useGeocoder = () => {
-  // mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw';
-  // var geocoder = new MapboxGeocoder({
-  // accessToken: mapboxgl.accessToken,
-  // types: 'country,region,place,postcode,locality,neighborhood'
-  // });
-   
-  // geocoder.addTo('#geocoder');
-// }
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,49 +20,38 @@ const useStyles = makeStyles((theme) => ({
 const HomeForm = (props) => {
   const classes = useStyles();
 
-  const parkNames = {}
-  // props.state.placesReducer.parks.map(park => park.fullName)
-
+  const NPs =  props.state.placesReducer.parks.map(park => park.fullName)
+ 
   return (
     <div className="homeForm">
-      {/* <div id="geocoder">{useGeocoder}</div> */}
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={(e) => {
+        <form className={classes.root} noValidate autoComplete="on" onSubmit={(e) => {
           e.preventDefault()
-          props.setArea(props.state.placesReducer.homeForm)
+          props.setArea({start: props.state.placesReducer.start, end: props.state.placesReducer.end})
           props.history.push('/places')}}
           >
 
           <Autocomplete
-            id="combo-box-demo"
-            options={parkNames}
-            getOptionLabel={(option) => option.title}
+            id="start"
+            label="homeForm"
+            type="start"
+            options={NPs}
+            getOptionLabel={(option) => option}
             style={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+            onChange={props.startHandleOnChange}
+            renderInput={(params) => <TextField {...params} label="Start Location" variant="outlined"/>}
           />
 
           <Autocomplete
-            id="combo-box-demo"
-            options={parkNames}
-            getOptionLabel={(option) => option.title}
+            id="end"
+            name="homeForm"
+            type="end"
+            options={NPs}
+            getOptionLabel={(option) => option}
             style={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+            onChange={props.endHandleOnChange}
+            renderInput={(params) => <TextField {...params} label="End Location" variant="outlined"/>}
           />
-        {/* <TextField 
-          size="small" 
-          id="start" 
-          name="homeForm"
-          label="Start Location" 
-          variant="outlined"
-          onChange={props.placesHandleOnChange}
-        />
-        <TextField 
-          size="small" 
-          id="end" 
-          name="homeForm"
-          label="End Location" 
-          variant="outlined" 
-          onChange={props.placesHandleOnChange}
-        /> */}
+
         <Button 
           variant="contained" 
           color="secondary"
@@ -93,10 +71,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    placesHandleOnChange: (input) => dispatch(placesHandleOnChange(input)),
+    startHandleOnChange: (input) => dispatch(startHandleOnChange(input)),
+    endHandleOnChange: (input) => dispatch(endHandleOnChange(input)),
     setArea: (area) => dispatch(setArea(area)),
   }
 }
+
+
 
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeForm))

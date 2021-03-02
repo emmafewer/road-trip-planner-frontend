@@ -4,7 +4,7 @@ import { Container } from '@material-ui/core'
 import Button from '@material-ui/core/Button';
 import { setActivePanel } from '../redux/actions/placesActions';
 import ParkSideCard from '../components/ParkSideCard'
-import CampgroundSideCard from '../components/CampgroundSideCard'
+import RSideCard from './RSideCard'
 
 const RSidePanel = props => {
     return (
@@ -36,8 +36,8 @@ const RSidePanel = props => {
                     </Button>
                 </div>
                 {props.state.placesReducer.active === "Parks"
-                ? props.state.roadTripReducer.trip.parks.map(park => < ParkSideCard park={park}/>)
-                : props.state.roadTripReducer.trip.campgrounds.map(campground => < CampgroundSideCard campground={campground}/>)
+                ? props.state.roadTripReducer.trip.parks.map(park => < RSideCard place={park}/>)
+                : props.state.roadTripReducer.trip.campgrounds.map(campground => < RSideCard place={campground}/>)
                 }
                 {/* {props.state.placesReducer.active === "View All" && <List />} */}
             </Container>

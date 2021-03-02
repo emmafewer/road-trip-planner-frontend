@@ -1,5 +1,6 @@
 import React from "react"
 import {connect} from 'react-redux'
+import Button from '@material-ui/core/Button';
 
 class Profile extends React.Component {
 
@@ -11,12 +12,24 @@ class Profile extends React.Component {
                 <h3>Name: {this.props.state.userReducer.user.name}</h3>
                 <h3>Username: {this.props.state.userReducer.user.username}</h3>
                 <form style={{paddingBottom: "2em"}} onSubmit={(e) => this.props.updateUser(e, this.props.userReducer.user)}>
-                    <input className='col-3' style={{height:'30px', borderWidth:'1px', borderRadius:'3px'}} type="text" name="name" placeholder="Update Name"/>
+                    <input type="text" name="name" placeholder="Update Name"/>
                     <br></br>
                     <br></br>
-                    <button className='col-2 btn-outline-secondary btn btn-md' type="submit" value="Submit">Submit</button>
+                  <Button 
+                    variant="outlined" 
+                    color="secondary"
+                    type="submit"
+                  >
+                    Update Name
+                  </Button>
                 </form>
-                <button onClick={() => this.props.deleteUser(this.props.state.userReducer.user)} className='col-2 btn-outline-secondary btn btn-md'>Delete User</button>
+
+                <Button 
+                  variant="outlined" 
+                  color="secondary"
+                >
+                  Delete User
+                </Button>
             </div>
         </div>
     )

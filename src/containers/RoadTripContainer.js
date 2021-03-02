@@ -54,26 +54,6 @@ class RoadTripContainer extends React.Component {
         } else {
             return (
                 <form noValidate autoComplete="off" onSubmit={this.patchRoadTrip}>
-                  {/* <TextField 
-                    size="small" 
-                    id="start" 
-                    name="dates"
-                    label="Start Date" 
-                    variant="outlined"
-                    style={{backgroundColor: "white"}}
-                    onChange={this.props.roadTripDates}
-                  />
-                  <TextField 
-                    size="small" 
-                    id="end" 
-                    name="dates"
-                    label="End Date" 
-                    variant="outlined" 
-                    style={{backgroundColor: "white"}}
-                    onChange={this.props.roadTripDates}
-                  /> */}
-
-
                     <DateRangePicker
                         startDateId="startDate"
                         endDateId="endDate"
@@ -123,7 +103,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // roadTripDates: (dates) => dispatch(roadTripDates(dates)),
         setTrip: (trip) => dispatch(setTrip(trip))
     }
   }

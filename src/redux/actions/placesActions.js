@@ -1,9 +1,14 @@
-export const placesHandleOnChange = (e) => {
+export const startHandleOnChange = (e) => {
     return {
-        type: 'PLACES_FORM_INPUT',
-        key: e.target.id,
-        value: e.target.value,
-        formType: e.target.name
+        type: 'START_FORM_INPUT',
+        start: e.target.innerText,
+    }
+}
+
+export const endHandleOnChange = (e) => {
+    return {
+        type: 'END_FORM_INPUT',
+        end: e.target.innerText,
     }
 }
 

@@ -6,30 +6,32 @@ import State from '../components/State.js'
 import {connect} from 'react-redux'
 import { setAllParks } from '../redux/actions/placesActions';
 
-const HomeContainer = (props) => {
+class HomeContainer extends React.Component {
 
-  const getParks = (props) => {
+  componentDidMount() {
     fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
     .then(resp => resp.json())
-    .then(parks => props.setAllParks(parks.data))
+    .then(parks => this.props.setAllParks(parks.data))
   }
 
-  return (
-    <div className="homeContainer">
-      {getParks(props)}
-
-      {props.state.placesReducer.parks 
-      ?
-        <>
-          < HomeForm />  
-          < Map />
-        </>
-      : null
-      }
-      {/* < Campgrounds /> */}
-      {/* < State /> */}
-    </div>
-  );
+  render () {
+    return (
+      <div className="homeContainer">
+        
+  
+        {this.props.state.placesReducer.parks 
+        ?
+          <>
+            < HomeForm />  
+            < Map />
+          </>
+        : null
+        }
+        {/* < Campgrounds /> */}
+        {/* < State /> */}
+      </div>
+    );  
+  }
 }
 
 const mapStateToProps = state => {

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl';
+import {connect} from 'react-redux'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw'
 
@@ -23,13 +24,12 @@ class Map extends React.Component {
     }
 
     getParkMarkers = (map) => {
-        if (this.props.state.placesReducer) {
 
         
         const { parks } = this.props.state.placesReducer
         const features = []
 
-        parks.data.forEach( park => {
+        parks.forEach( park => {
            
             let feature = {
                 'type' : 'Feature',
@@ -45,6 +45,7 @@ class Map extends React.Component {
             features.push(feature)
         })
 
+        map.on('load', function() {
         map.addSource("locations", {
             "type": "geojson",
             "data": {
@@ -52,6 +53,7 @@ class Map extends React.Component {
                 "features": features
             }
         })
+    })
 
         // var hoveredStateId = null;
         //     map.addSource("states", {
@@ -130,7 +132,7 @@ class Map extends React.Component {
                 .setPopup(popup)
                 .addTo(map);
         });
-    }
+    
     }
 
 
@@ -141,4 +143,10 @@ class Map extends React.Component {
     }
 }
 
-export default Map
+const mapStateToProps = state => {
+    return {
+        state: state
+    }
+  }
+
+export default connect(mapStateToProps)(Map)
