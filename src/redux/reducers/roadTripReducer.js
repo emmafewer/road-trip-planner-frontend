@@ -2,6 +2,7 @@ const initialState = {
     newTripInput: null,
     trips: null,
     trip: null,
+    dates: null
 }
 
 const roadTripReducer = (state = initialState, action) => {
@@ -17,6 +18,10 @@ const roadTripReducer = (state = initialState, action) => {
         case 'SET_TRIP':
             return {
                 ...state, trip: action.trip
+            }
+        case 'ROAD_TRIP_DATE_INPUT':
+            return {
+                ...state, [action.formType]: {...state[action.formType], [action.key]: action.value}
             }
         default:
             return state

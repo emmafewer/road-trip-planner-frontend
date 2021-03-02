@@ -122,7 +122,32 @@ body {
   margin: 2em;
 }
 
+.rSidePanel {
+  display:inline-block;
+  width: 30%;
+  float: left;
+  height: 80vh;
+  padding-right: 2em;
+}
 
+#rSidePanelContainer {
+  overflow-y: scroll; 
+  height: 100%;
+  /* padding-right: 1em; */
+}
+
+.roadTripContainer {
+  color: white;
+  height: 80vh;
+  width: 160vh;
+  padding-top: 3em;
+}
+
+.rMapContainer {
+  display:inline-block;
+  width: 50%;
+  padding-left: 1em;
+}
 
 
 

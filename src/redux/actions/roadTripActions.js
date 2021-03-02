@@ -18,3 +18,12 @@ export const setTrip = (trip) => {
         trip: trip
     }
 }
+
+export const roadTripDates = (e) => {
+    return {
+        type: 'ROAD_TRIP_DATE_INPUT',
+        key: e.target.id,
+        value: e.target.value,
+        formType: e.target.name
+    }
+}

@@ -20,13 +20,7 @@ class MyRoadTrips extends React.Component {
         }
     }
 
-    // createTripCards = (user) => {
-    //     debugger
-    //     user.road_trips.map(trip => <RoadTripCard trip={trip} />)
-    // }
-
     render () {
-        console.log(this.props.state.roadTripReducer.trips, this.props.state.userReducer.user)
         return (
             <div className="myRoadTrips">
                 {this.props.state.roadTripReducer.trips
