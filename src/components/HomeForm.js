@@ -6,6 +6,7 @@ import mapboxgl from 'mapbox-gl';
 import { placesHandleOnChange, setArea } from '../redux/actions/placesActions';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 // const useGeocoder = () => {
   // mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw';
@@ -29,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
 
 const HomeForm = (props) => {
   const classes = useStyles();
+
+  const parkNames = {}
+  // props.state.placesReducer.parks.map(park => park.fullName)
+
   return (
     <div className="homeForm">
       {/* <div id="geocoder">{useGeocoder}</div> */}
@@ -37,13 +42,28 @@ const HomeForm = (props) => {
           props.setArea(props.state.placesReducer.homeForm)
           props.history.push('/places')}}
           >
-        <TextField 
+
+          <Autocomplete
+            id="combo-box-demo"
+            options={parkNames}
+            getOptionLabel={(option) => option.title}
+            style={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+          />
+
+          <Autocomplete
+            id="combo-box-demo"
+            options={parkNames}
+            getOptionLabel={(option) => option.title}
+            style={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+          />
+        {/* <TextField 
           size="small" 
           id="start" 
           name="homeForm"
           label="Start Location" 
           variant="outlined"
-          // value="Glacier National Park"
           onChange={props.placesHandleOnChange}
         />
         <TextField 
@@ -52,9 +72,8 @@ const HomeForm = (props) => {
           name="homeForm"
           label="End Location" 
           variant="outlined" 
-          // value="Olympic National Park"
           onChange={props.placesHandleOnChange}
-        />
+        /> */}
         <Button 
           variant="contained" 
           color="secondary"

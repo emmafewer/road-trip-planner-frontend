@@ -7,22 +7,26 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxc
 class Map extends React.Component {
 
     componentDidMount() {
-    let map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
-        zoom: 3,
-        center: [-95.7129, 37.0902],
-        scrollZoom: true,
-    });
-    fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
-    .then(resp => resp.json())
-    .then(parks => {
-        this.getParkMarkers(parks, map)
-        })
+        let map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
+            zoom: 3,
+            center: [-95.7129, 37.0902],
+            scrollZoom: true,
+        });
+    // fetch("https://developer.nps.gov/api/v1/parks?&limit=1000&api_key=wrzMX2zd8xPlWQotxViQtACAPNmjfcmoylyVV7oR")
+    // .then(resp => resp.json())
+    // .then(parks => {
+    //     this.getParkMarkers(parks, map)
+    //     })
+        this.getParkMarkers(map)
     }
 
-    getParkMarkers = (parks, map) => {
+    getParkMarkers = (map) => {
+        if (this.props.state.placesReducer) {
 
+        
+        const { parks } = this.props.state.placesReducer
         const features = []
 
         parks.data.forEach( park => {
@@ -126,7 +130,7 @@ class Map extends React.Component {
                 .setPopup(popup)
                 .addTo(map);
         });
-
+    }
     }
 
 

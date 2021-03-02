@@ -5,35 +5,56 @@ import RMapNavBar from '../roadtrip/RMapNavBar'
 import RShowMap from '../roadtrip/RShowMap'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { roadTripDates } from '../redux/actions/roadTripActions';
+import { roadTripDates, setTrip } from '../redux/actions/roadTripActions';
+import { DateRangePicker, DayPickerRangeController } from 'react-dates';
+import moment from 'moment'
+
 
 
 const BASE_URL = 'http://localhost:4000'
 
-class ShowContainer extends React.Component {
+class RoadTripContainer extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          startDate: null,
+          endDate: null,
+          focusedInput: null,
+        };
+    }
+
 
     patchRoadTrip = (e) => {
         e.preventDefault()
 
-        if (this.props.state.roadTripReducer.dates) {
-            fetch(`${BASE_URL}/road_trips/${this.props.state.roadTripReducer.trip.id}`,{
-                method: 'PATCH',
-                headers : {'content-type':'application/json', Authorization: `Bearer ${localStorage.token}`}, 
-                body: JSON.stringify({start_date: this.props.state.roadTripReducer.dates.start, end_date: this.props.state.roadTripReducer.dates.end})
-              })
-              .then(res => res.json())
-              .then(console.log)
-        }
+        fetch(`${BASE_URL}/road_trips/${this.props.state.roadTripReducer.trip.id}`,{
+            method: 'PATCH',
+            headers : {'content-type':'application/json', Authorization: `Bearer ${localStorage.token}`}, 
+            body: JSON.stringify({start_date: this.state.startDate, end_date: this.state.endDate})
+            })
+            .then(res => res.json())
+            .then(trip => this.props.setTrip(trip))
     }
     // setTrip
 
     checkForDates = () => {
         if (this.props.state.roadTripReducer.trip.start_date && this.props.state.roadTripReducer.trip.end_date) {
-            return this.props.state.roadTripReducer.trip.start_date - this.props.state.roadTripReducer.trip.end_date
+            return (
+                `${this.props.state.roadTripReducer.trip.start_date} - ${this.props.state.roadTripReducer.trip.end_date}`
+                // <DayPickerRangeController
+                //     startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                //     endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                //     onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+                //     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                //     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                //     initialVisibleMonth={() => moment().add(2, "M")} // PropTypes.func or null,
+                // />
+            )
         } else {
             return (
                 <form noValidate autoComplete="off" onSubmit={this.patchRoadTrip}>
-                  <TextField 
+                  {/* <TextField 
                     size="small" 
                     id="start" 
                     name="dates"
@@ -50,12 +71,24 @@ class ShowContainer extends React.Component {
                     variant="outlined" 
                     style={{backgroundColor: "white"}}
                     onChange={this.props.roadTripDates}
-                  />
-                  <Button 
-                    variant="outlined" 
-                    color="secondary"
-                    type="submit"
-                  >View Places</Button>
+                  /> */}
+
+
+                    <DateRangePicker
+                        startDateId="startDate"
+                        endDateId="endDate"
+                        startDate={this.state.startDate}
+                        endDate={this.state.endDate}
+                        onDatesChange={({ startDate, endDate }) => { this.setState({ startDate, endDate })}}
+                        focusedInput={this.state.focusedInput}
+                        onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
+                    />
+
+                    <Button 
+                        variant="outlined" 
+                        color="secondary"
+                        type="submit"
+                    >Set Dates</Button>
                   
                 </form>
             )
@@ -90,8 +123,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        roadTripDates: (dates) => dispatch(roadTripDates(dates)),
+        // roadTripDates: (dates) => dispatch(roadTripDates(dates)),
+        setTrip: (trip) => dispatch(setTrip(trip))
     }
   }
   
-export default connect(mapStateToProps, mapDispatchToProps)(ShowContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(RoadTripContainer)

@@ -28,3 +28,10 @@ export const setActivePanel = (e) => {
     }
 }
 
+export const setAllParks = (parks) => {
+    return {
+        type: 'SET_ALL_PARKS',
+        parks: parks
+    }
+}
+

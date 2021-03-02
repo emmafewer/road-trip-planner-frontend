@@ -2,7 +2,8 @@ const initialState = {
     homeForm: {},
     area: null,
     places: null,
-    active: "Parks"
+    active: "Parks",
+    parks: null
 }
 
 const placesReducer = (state = initialState, action) => {
@@ -22,6 +23,10 @@ const placesReducer = (state = initialState, action) => {
         case 'SET_ACTIVE_PANEL':
             return {
                 ...state, active: action.active
+            }
+        case 'SET_ALL_PARKS':
+            return {
+                ...state, parks: action.parks
             }
         default:
             return state

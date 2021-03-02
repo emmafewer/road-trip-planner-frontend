@@ -10,6 +10,11 @@ import {setUser} from './redux/actions/userActions'
 import ShowContainer from './containers/ShowContainer'
 import MyRoadTrips from './components/MyRoadTrips'
 import RoadTripContainer from './containers/RoadTripContainer'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+
+
 
 const BASE_URL = 'http://localhost:4000'
 

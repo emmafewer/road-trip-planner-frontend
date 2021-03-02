@@ -104,7 +104,7 @@ const Nav = (props) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={() => handleClick('/profile')}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={() => handleClick('/road_trips')}>My Road Trips</MenuItem>
                 <MenuItem onClick={() => {
                   props.logout()
                   handleLogout()
