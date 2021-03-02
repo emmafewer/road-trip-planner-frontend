@@ -24,7 +24,7 @@ const HomeForm = (props) => {
  
   return (
     <div className="homeForm">
-        <form className={classes.root} noValidate autoComplete="on" onSubmit={(e) => {
+        <form style={{display: "flex"}} className={classes.root} noValidate autoComplete="on" onSubmit={(e) => {
           e.preventDefault()
           props.setArea({start: props.state.placesReducer.start, end: props.state.placesReducer.end})
           props.history.push('/places')}}
@@ -56,7 +56,7 @@ const HomeForm = (props) => {
           variant="contained" 
           color="secondary"
           type="submit"
-        >View Places</Button>
+        >View Parks and Campgrounds</Button>
         
         </form>
     </div>

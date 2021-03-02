@@ -5,8 +5,11 @@ import Button from '@material-ui/core/Button';
 import { setActivePanel } from '../redux/actions/placesActions';
 import ParkSideCard from '../components/ParkSideCard'
 import RSideCard from './RSideCard'
+import RList from './RList'
+
 
 const RSidePanel = props => {
+   
     return (
         <div className="rSidePanel">
             <Container id="rSidePanelContainer" >
@@ -37,9 +40,10 @@ const RSidePanel = props => {
                 </div>
                 {props.state.placesReducer.active === "Parks"
                 ? props.state.roadTripReducer.trip.parks.map(park => < RSideCard place={park}/>)
-                : props.state.roadTripReducer.trip.campgrounds.map(campground => < RSideCard place={campground}/>)
+                : props.state.placesReducer.active === "Campgrounds" 
+                ? props.state.roadTripReducer.trip.campgrounds.map(campground => < RSideCard place={campground}/>)
+                : props.state.placesReducer.active === "View All" && <RList />
                 }
-                {/* {props.state.placesReducer.active === "View All" && <List />} */}
             </Container>
         </div>
     );

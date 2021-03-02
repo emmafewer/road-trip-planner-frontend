@@ -36,7 +36,6 @@ class RoadTripContainer extends React.Component {
             .then(res => res.json())
             .then(trip => this.props.setTrip(trip))
     }
-    // setTrip
 
     checkForDates = () => {
         if (this.props.state.roadTripReducer.trip.start_date && this.props.state.roadTripReducer.trip.end_date) {

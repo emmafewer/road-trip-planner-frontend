@@ -53,7 +53,6 @@ const CampgroundDialog = (props) => {
       body: JSON.stringify({road_trip_id: roadtrip.id, campground_id: campground.id})
     })
     .then(res => res.json())
-    // .then(save => console.log(save))
   }
 
   return (

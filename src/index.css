@@ -59,7 +59,7 @@ body {
 
 .homeForm {
   background-color: white;
-  display: block
+  display: flex
 }
 
 #profile {
