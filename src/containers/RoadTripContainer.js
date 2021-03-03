@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import { roadTripDates, setTrip } from '../redux/actions/roadTripActions';
 import { DateRangePicker, DayPickerRangeController } from 'react-dates';
 import moment from 'moment'
+import RTestMap from '../roadtrip/RTestMap'
 
 
 
@@ -40,7 +41,9 @@ class RoadTripContainer extends React.Component {
     checkForDates = () => {
         if (this.props.state.roadTripReducer.trip.start_date && this.props.state.roadTripReducer.trip.end_date) {
             return (
-                `${this.props.state.roadTripReducer.trip.start_date} - ${this.props.state.roadTripReducer.trip.end_date}`
+                <h3>
+                    {`${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(0,4)} - ${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(0,4)}`}
+                </h3>
                 // <DayPickerRangeController
                 //     startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                 //     endDate={this.state.endDate} // momentPropTypes.momentObj or null,
@@ -85,6 +88,7 @@ class RoadTripContainer extends React.Component {
                     <div className="rMapContainer">
                         < RMapNavBar />
                         < RShowMap />
+                        {/* <RTestMap /> */}
                     </div>
                 </>
                 }

@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box'
+import Draggable from 'react-draggable'
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -25,18 +25,18 @@ const RListItem = (props) => {
   const classes = useStyles();
 
   return (
-    <Box m={2} pt={3}>
+    <Draggable>
         <Card className={classes.root} >
-        <CardContent>
-            <Typography variant="h5" component="h2">
-            {props.place.name}
-            </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-            {/* {props.trip.start_date} - {props.trip.end_date} */}
-            </Typography>
-        </CardContent>
+            <CardContent>
+                <Typography variant="h5" component="h2">
+                {props.place.name}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                {/* {props.trip.start_date} - {props.trip.end_date} */}
+                </Typography>
+            </CardContent>
         </Card>
-    </Box>
+    </Draggable>
   );
 }
 
