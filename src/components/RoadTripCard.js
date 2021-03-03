@@ -9,7 +9,9 @@ import Box from '@material-ui/core/Box'
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { setTrip } from '../redux/actions/roadTripActions';
+import { setRoadTripList, setTrip } from '../redux/actions/roadTripActions'
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -40,6 +42,21 @@ const RoadTripCard= (props) => {
       .then(props.history.push("/road_trip"))
   }
 
+  const setNewRoadTrips = (props) => {
+    const newRoadTripList = props.state.roadTripReducer.trips.filter(trip => trip.id !== props.trip.id)
+    props.setRoadTripList(newRoadTripList)
+  }
+
+  const deleteTrip = () => {
+    fetch(`${BASE_URL}/road_trips/${props.trip.id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`
+      }
+    })
+    .then(setNewRoadTrips(props))
+  }
+
   return (
     <Box m={2} pt={3}>
         <Card className={classes.root} >
@@ -56,16 +73,31 @@ const RoadTripCard= (props) => {
             size="small"
             onClick={goToTrip}
             >Go To Trip</Button>
+                    <IconButton 
+            aria-label="delete road trip"
+            color="inherit" 
+            id="delete"
+            onClick={() => deleteTrip(props)}>
+          <DeleteIcon />
+        </IconButton>
         </CardActions>
+
         </Card>
     </Box>
   );
 }
 
+const mapStateToProps = state => {
+  return {
+      state: state
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        setTrip: (trip) => dispatch(setTrip(trip))
+        setTrip: (trip) => dispatch(setTrip(trip)),
+        setRoadTripList: (trips) => dispatch(setRoadTripList(trips))
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(RoadTripCard))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RoadTripCard))

@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import { setRoadTripList } from '../redux/actions/roadTripActions';
+import { setRoadTripList, setTrip } from '../redux/actions/roadTripActions';
 import {connect} from 'react-redux'
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -71,6 +71,16 @@ const RSideCard = (props) => {
       return alert(props.place.url)
   }
 
+  const fetchTrip = (props) => {
+    if (props.state.placesReducer.active === "Parks") {
+      const newParkArray = props.state.roadTripReducer.trip.parks.filter(park => park.id !== props.place.id)
+      props.setTrip({...props.state.roadTripReducer.trip, parks: newParkArray})
+    } else if (props.state.placesReducer.active === "Campgrounds") {
+      const newCampArray = props.state.roadTripReducer.trip.campgrounds.filter(campground => campground.id !== props.place.id)
+      props.setTrip({...props.state.roadTripReducer.trip, campgrounds: newCampArray})
+    }
+  }
+
   const deletePlace = (props) => {
     if (props.state.placesReducer.active === "Parks") {
         fetch(`${BASE_URL}/parks/${props.place.id}`, {
@@ -79,7 +89,7 @@ const RSideCard = (props) => {
               Authorization: `Bearer ${localStorage.token}`
             }
         })
-        .then(resp => resp.json())
+        .then(fetchTrip(props))
     } else if (props.state.placesReducer.active === "Campgrounds") {
         fetch(`${BASE_URL}/campgrounds/${props.place.id}`, {
             method: 'DELETE',
@@ -87,7 +97,7 @@ const RSideCard = (props) => {
               Authorization: `Bearer ${localStorage.token}`
             }
         })
-        .then(resp => resp.json())
+        .then(fetchTrip(props))
     }
 
   }
@@ -150,7 +160,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      setRoadTripList: (trips) => dispatch(setRoadTripList(trips))
+      setRoadTripList: (trips) => dispatch(setRoadTripList(trips)),
+      setTrip: (trip) => dispatch(setTrip(trip))
     }
 }
 

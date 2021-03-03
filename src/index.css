@@ -74,7 +74,8 @@ body {
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%) 
+  transform: translate(-50%, -50%) ;
+  padding-top: 2em;
 }
 
 .showContainer {
@@ -141,7 +142,7 @@ body {
   color: white;
   height: 80vh;
   width: 160vh;
-  padding-top: 3em;
+  /* padding-top: 5em; */
 }
 
 .rMapContainer {

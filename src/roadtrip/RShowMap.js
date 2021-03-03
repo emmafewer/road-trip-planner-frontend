@@ -7,7 +7,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxc
 class RShowMap extends React.Component {
 
     componentDidMount() {
-        if (this.props.state.roadTripReducer.trip) {
+        if (this.props.state.roadTripReducer.trip && this.props.state.roadTripReducer.trip.parks) {
             const { parks } = this.props.state.roadTripReducer.trip
             const midLat = (parks.map(park => parseFloat(park.latitude)).reduce((a, b) => a + b, 0))/(parks.length)
             const midLong = (parks.map(park => parseFloat(park.longitude)).reduce((a, b) => a + b, 0))/(parks.length)

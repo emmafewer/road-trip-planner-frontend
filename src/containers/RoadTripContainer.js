@@ -41,17 +41,26 @@ class RoadTripContainer extends React.Component {
     checkForDates = () => {
         if (this.props.state.roadTripReducer.trip.start_date && this.props.state.roadTripReducer.trip.end_date) {
             return (
+                <div >
                 <h3>
-                    {`${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(0,4)} - ${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(0,4)}`}
+                    {`${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(0,4)} - ${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(0,4)}   `}
+                    <Button 
+                        variant="outlined" 
+                        color="secondary"
+                        style={{display: 'inline-flex'}}
+                    >Edit Dates
+                    </Button>
                 </h3>
-                // <DayPickerRangeController
+                {/* // <DayPickerRangeController
                 //     startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                 //     endDate={this.state.endDate} // momentPropTypes.momentObj or null,
                 //     onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
                 //     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                 //     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                 //     initialVisibleMonth={() => moment().add(2, "M")} // PropTypes.func or null,
-                // />
+                // /> */}
+
+                </div>
             )
         } else {
             return (

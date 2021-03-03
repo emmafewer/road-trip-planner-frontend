@@ -32,7 +32,7 @@ class Signup extends React.Component {
     render(){
         return(
             <div>
-                <h1>SignUp Form</h1>
+                <h1 style={{color: "white"}}>SignUp Form</h1>
                 <form className="signup" onSubmit={this.signup}>
                     <input 
                         type="text" 
