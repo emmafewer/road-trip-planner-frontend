@@ -4,7 +4,7 @@ import HomeForm from '../components/HomeForm'
 import Campgrounds from '../components/Campgrounds.js'
 import State from '../components/State.js'
 import {connect} from 'react-redux'
-import { setAllParks } from '../redux/actions/placesActions';
+import { setAllParks } from '../redux/actions/placesActions'
 
 class HomeContainer extends React.Component {
 

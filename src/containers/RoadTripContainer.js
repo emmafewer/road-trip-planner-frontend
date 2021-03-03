@@ -9,7 +9,7 @@ import { roadTripDates, setTrip } from '../redux/actions/roadTripActions';
 import { DateRangePicker, DayPickerRangeController } from 'react-dates';
 import moment from 'moment'
 import RTestMap from '../roadtrip/RTestMap'
-
+import RTestDirections from '../roadtrip/RTestDirections'
 
 
 const BASE_URL = 'http://localhost:4000'
@@ -98,6 +98,7 @@ class RoadTripContainer extends React.Component {
                         < RMapNavBar />
                         < RShowMap />
                         {/* <RTestMap /> */}
+                        < RTestDirections />
                     </div>
                 </>
                 }

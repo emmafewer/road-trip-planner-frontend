@@ -14,8 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
-
-
 const BASE_URL = 'http://localhost:4000'
 
 class App extends React.Component {
