@@ -96,7 +96,7 @@ class RoadTripContainer extends React.Component {
                     < RSidePanel />
                     <div className="rMapContainer">
                         < RMapNavBar />
-                        < RShowMap />
+                        {/* < RShowMap /> */}
                         {/* <RTestMap /> */}
                         < RTestDirections />
                     </div>
