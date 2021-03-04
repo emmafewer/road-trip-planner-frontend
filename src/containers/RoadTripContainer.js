@@ -25,7 +25,6 @@ class RoadTripContainer extends React.Component {
         };
     }
 
-
     patchRoadTrip = (e) => {
         e.preventDefault()
 
@@ -116,7 +115,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setTrip: (trip) => dispatch(setTrip(trip))
+        setTrip: (trip) => dispatch(setTrip(trip)),
     }
   }
   

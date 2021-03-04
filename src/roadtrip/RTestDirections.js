@@ -1,6 +1,8 @@
 import React from 'react'
 import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
+import {connect} from 'react-redux'
+import { joinPlaces } from '../redux/actions/roadTripActions';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw'
 
@@ -21,59 +23,92 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxc
 // "latitude": "46.41358923",
 // "longitude": "-112.7467024",
 
+
+
 const startLocation = [-113.6458443, 45.64647324]
 
-const orders = {
-    type: "FeatureCollection",
-    features: [{
-      type: 'Feature',
-      properties: {
-        address: 'Start location',
-        accepted: 'home'
-      },
-      geometry: {
-        type: 'Point',
-        coordinates: startLocation
-      }
-    }, {
-        type: 'Feature',
-        properties: {
-          address: 'Fort Union',
-          accepted: true
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [-104.0375238, 48.00075828]
-        }
-      }, 
-      {
-        type: 'Feature',
-        properties: {
-          address: 'Glacier',
-          accepted: true
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [-113.8009306, 48.68414678]
-        }
-      },
-      {
-        type: 'Feature',
-        properties: {
-          address: 'Grant Kohrs Ranch',
-          accepted: true
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [-112.7467024, 46.41358923]
-        }
-      }
-    ]
-}
+
+
+// const orders = {
+//     type: "FeatureCollection",
+//     features: [{
+//       type: 'Feature',
+//       properties: {
+//         address: 'Start location',
+//         accepted: 'home'
+//       },
+//       geometry: {
+//         type: 'Point',
+//         coordinates: startLocation
+//       }
+//     }, {
+//         type: 'Feature',
+//         properties: {
+//           address: 'Fort Union',
+//           accepted: true
+//         },
+//         geometry: {
+//           type: 'Point',
+//           coordinates: [-104.0375238, 48.00075828]
+//         }
+//       }, 
+//       {
+//         type: 'Feature',
+//         properties: {
+//           address: 'Glacier',
+//           accepted: true
+//         },
+//         geometry: {
+//           type: 'Point',
+//           coordinates: [-113.8009306, 48.68414678]
+//         }
+//       },
+//       {
+//         type: 'Feature',
+//         properties: {
+//           address: 'Grant Kohrs Ranch',
+//           accepted: true
+//         },
+//         geometry: {
+//           type: 'Point',
+//           coordinates: [-112.7467024, 46.41358923]
+//         }
+//       }
+//     ]
+// }
 
 class RTestDirections extends React.Component {
 
+
+
     componentDidMount() {
+
+        let campgrounds = this.props.state.roadTripReducer.trip.campgrounds
+        let parks = this.props.state.roadTripReducer.trip.parks
+        let places = campgrounds.concat(parks)
+    
+        const orders = {
+            type: "FeatureCollection",
+            features: [],
+        }
+        
+        places.forEach( place => {
+            let feature = {
+                'type' : 'Feature',
+                'geometry' : {
+                    'type' : 'Point',
+                    'coordinates' : [ place.longitude, place.latitude ]
+                },
+                'properties' : {
+                    'name' : place.name,
+                    'description' : place.description
+                }
+            }
+            orders.features.push(feature)
+        })
+
+
+
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
@@ -82,7 +117,21 @@ class RTestDirections extends React.Component {
             // transformRequest: transformRequest
         });
 
-        this.handleMap(map)
+        this.handleMap(map, orders)
+    }
+
+    updatePlacesProps = (waypoints) => {
+        let orderedArray = []
+        waypoints.forEach(point => {
+            let newPlace = {}
+            this.props.state.roadTripReducer.places.forEach(place => {
+                if (point.name === place.name) {
+                    newPlace = {order: point.waypoint_index, ...place}
+                    orderedArray.push(newPlace)
+                }
+            })
+        })
+        this.props.joinPlaces(orderedArray)
     }
 
     setTripLine = function(trip, map) {
@@ -122,9 +171,8 @@ class RTestDirections extends React.Component {
         map.getSource('deliveries').setData(deliveries);
     }
 
-    getDeliveryRoute = (map) => {
-
-        const deliverable = orders.features.filter(point => point.properties.accepted);
+    getDeliveryRoute = (map, orders) => {
+        const deliverable = orders.features
         // Once there are 2 deliveries, get the delivery route
         if (deliverable.length > 2) {
             const coords = [];
@@ -145,9 +193,9 @@ class RTestDirections extends React.Component {
             
             fetch(optimizeUrl).then((res) => res.json()).then((res) => {
               // Add the original address text to the waypoints
-            //   res.waypoints.forEach((waypoint, i) => {
-            //     waypoint.address = waypoint[i] == 0 ? 'Start' : deliverable[i].properties.address;
-            //   });
+              res.waypoints.forEach((waypoint, i) => {
+                waypoint.name = waypoint[i] == 0 ? 'Start' : deliverable[i].properties.name;
+              });
     
             // Add the distance, duration, and turn-by-turn instructions to the sidebar
             // setOverview(res);
@@ -155,11 +203,12 @@ class RTestDirections extends React.Component {
             // Draw the route and stops on the map
             this.setTripLine(res.trips[0], map);
             this.setStops(res.waypoints, map);
+            this.updatePlacesProps(res.waypoints)
           })
         }
     }
 
-    handleMap = (map) => {
+    handleMap = (map, orders) => {
         map.on("load", () => {
 
             map.addSource("orders", {
@@ -239,7 +288,7 @@ class RTestDirections extends React.Component {
               });
 
             map.getSource('orders').setData(orders)
-            this.getDeliveryRoute(map)
+            this.getDeliveryRoute(map, orders)
         })
     }
 
@@ -282,4 +331,16 @@ class RTestDirections extends React.Component {
 
 }
 
-export default RTestDirections
+const mapStateToProps = state => {
+    return {
+        state: state
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        joinPlaces: (places) => dispatch(joinPlaces(places))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RTestDirections)

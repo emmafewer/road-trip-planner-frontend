@@ -2,7 +2,8 @@ const initialState = {
     newTripInput: null,
     trips: null,
     trip: null,
-    dates: null
+    dates: null, 
+    places: null,
 }
 
 const roadTripReducer = (state = initialState, action) => {
@@ -22,6 +23,10 @@ const roadTripReducer = (state = initialState, action) => {
         case 'ROAD_TRIP_DATE_INPUT':
             return {
                 ...state, [action.formType]: {...state[action.formType], [action.key]: action.value}
+            }
+        case 'JOIN_PLACES':
+            return {
+                ...state, places: action.places
             }
         default:
             return state

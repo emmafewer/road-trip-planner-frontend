@@ -42,7 +42,8 @@ const RSidePanel = props => {
                 ? props.state.roadTripReducer.trip.parks.map(park => < RSideCard place={park}/>)
                 : props.state.placesReducer.active === "Campgrounds" 
                 ? props.state.roadTripReducer.trip.campgrounds.map(campground => < RSideCard place={campground}/>)
-                : props.state.placesReducer.active === "View All" && <RList />
+                : props.state.placesReducer.active === "View All" 
+                && <RList />
                 }
             </Container>
         </div>

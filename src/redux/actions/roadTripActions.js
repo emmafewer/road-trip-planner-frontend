@@ -27,3 +27,10 @@ export const roadTripDates = (e) => {
         formType: e.target.name
     }
 }
+
+export const joinPlaces = (places) => {
+    return {
+        type: 'JOIN_PLACES',
+        places: places
+    }
+}
