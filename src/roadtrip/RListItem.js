@@ -28,6 +28,9 @@ const RListItem = (props) => {
     <Draggable>
         <Card className={classes.root} >
             <CardContent>
+            <Typography variant="h5" component="h2">
+                {props.place.order}
+                </Typography>
                 <Typography variant="h5" component="h2">
                 {props.place.name}
                 </Typography>

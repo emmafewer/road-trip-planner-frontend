@@ -30,19 +30,19 @@ const RSidePanel = props => {
                         Campgrounds
                     </Button>
 
-                    <Button 
+                    {/* <Button 
                     variant="contained" 
                     color="primary"
                     onClick={props.setActivePanel}
                     >
                         View All
-                    </Button>
+                    </Button> */}
                 </div>
                 {props.state.placesReducer.active === "Parks"
                 ? props.state.roadTripReducer.trip.parks.map(park => < RSideCard place={park}/>)
                 : props.state.placesReducer.active === "Campgrounds" 
                 ? props.state.roadTripReducer.trip.campgrounds.map(campground => < RSideCard place={campground}/>)
-                : props.state.placesReducer.active === "View All" 
+                : props.state.placesReducer.active === "Route View" 
                 && <RList />
                 }
             </Container>

@@ -10,6 +10,7 @@ import { DateRangePicker, DayPickerRangeController } from 'react-dates';
 import moment from 'moment'
 import RTestMap from '../roadtrip/RTestMap'
 import RTestDirections from '../roadtrip/RTestDirections'
+import { joinPlaces } from '../redux/actions/roadTripActions';
 
 
 const BASE_URL = 'http://localhost:4000'
@@ -23,6 +24,15 @@ class RoadTripContainer extends React.Component {
           endDate: null,
           focusedInput: null,
         };
+    }
+
+    setPlaces = () => {
+        if (this.props.state.roadTripReducer.trip) {
+            let campgrounds = this.props.state.roadTripReducer.trip.campgrounds
+            let parks = this.props.state.roadTripReducer.trip.parks
+            let places = campgrounds.concat(parks)
+            this.props.joinPlaces(places)
+        }
     }
 
     patchRoadTrip = (e) => {
@@ -88,6 +98,9 @@ class RoadTripContainer extends React.Component {
     render () {
         return (
             <div className="roadTripContainer">
+
+                {this.props.state.roadTripReducer.places ? null : this.setPlaces()}
+
                 {this.props.state.roadTripReducer.trip 
                 &&
                 <>
@@ -95,9 +108,11 @@ class RoadTripContainer extends React.Component {
                     < RSidePanel />
                     <div className="rMapContainer">
                         < RMapNavBar />
-                        {/* < RShowMap /> */}
+                        {this.props.state.roadTripReducer.show === "Map"
+                        ? < RShowMap /> 
+                        : < RTestDirections />
+                        }
                         {/* <RTestMap /> */}
-                        < RTestDirections />
                     </div>
                 </>
                 }
@@ -116,6 +131,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setTrip: (trip) => dispatch(setTrip(trip)),
+        joinPlaces: (places) => dispatch(joinPlaces(places)),
     }
   }
   

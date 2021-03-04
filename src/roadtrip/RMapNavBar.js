@@ -1,8 +1,10 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
-import { joinPlaces } from '../redux/actions/roadTripActions';
+import { joinPlaces, setShow } from '../redux/actions/roadTripActions';
+import { setActivePanel } from '../redux/actions/placesActions';
 import {connect} from 'react-redux'
 import StartAndEndDialog from './StartAndEndDialog'
+import RShowMap from './RShowMap'
 
 const RMapNavBar = (props) => {
     const [open, setOpen] = React.useState(false);
@@ -23,12 +25,19 @@ const RMapNavBar = (props) => {
         // setStartAndEnd(props)
     }
 
+    // const handleShow = (e, props) => {
+    //     debugger
+    //     props.setShow(e.target.name)
+    // }
+
     return (
         <div className="rMapNav">
             <Button 
             variant="contained" 
             color="secondary"
             type="submit"
+            name="Main Map"
+            onClick={(e) => props.setShow(e)}
             >
                 Map
             </Button>
@@ -51,7 +60,10 @@ const RMapNavBar = (props) => {
             <Button 
             variant="contained" 
             color="primary"
-            onClick={() => addPlacestoProps(props)}
+            name="Route View"
+            onClick={(e) => {
+                props.setShow(e)
+                props.setActivePanel(e)}}
             >
                 Route View
             </Button>
@@ -67,8 +79,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        joinPlaces: (places) => dispatch(joinPlaces(places))
+        joinPlaces: (places) => dispatch(joinPlaces(places)),
+        setActivePanel: (button) => dispatch(setActivePanel(button)),
+        setShow: (name) => dispatch(setShow(name))
     }
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(RMapNavBar)

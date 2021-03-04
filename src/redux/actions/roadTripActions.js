@@ -34,3 +34,10 @@ export const joinPlaces = (places) => {
         places: places
     }
 }
+
+export const setShow = (e) => {
+    return {
+        type: 'SET_SHOW',
+        show: e.target.innerHTML
+    }
+}

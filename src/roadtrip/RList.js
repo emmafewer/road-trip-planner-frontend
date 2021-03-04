@@ -3,17 +3,17 @@ import {connect} from 'react-redux'
 import RListItem from './RListItem'
 
 const generateList = (props) => {
-  let campgrounds = props.state.roadTripReducer.trip.campgrounds
-  let parks = props.state.roadTripReducer.trip.parks
-  let places = campgrounds.concat(parks)
-  return (places.map(place => < RListItem place={place} />))
+  // let campgrounds = props.state.roadTripReducer.trip.campgrounds
+  // let parks = props.state.roadTripReducer.trip.parks
+  // let places = campgrounds.concat(parks)
+  return (props.state.roadTripReducer.places.sort((a, b) => a.order - b.order).map(place => < RListItem place={place} />))
 }
 
 const RList= (props) => {
   
     return (
       <div className="fullList">
-        {props.state.roadTripReducer.trip 
+        {props.state.roadTripReducer.places 
         && generateList(props)
         }
       </div>

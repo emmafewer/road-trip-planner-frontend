@@ -2,84 +2,11 @@ import React from 'react'
 import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import {connect} from 'react-redux'
-import { joinPlaces } from '../redux/actions/roadTripActions';
+import { joinPlaces } from '../redux/actions/roadTripActions'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw'
 
-// big hole
-// "latitude": "45.64647324",
-// "longitude": "-113.6458443",
-
-// fort union trading post
-// "latitude": "48.00075828",
-// "longitude": "-104.0375238",
-
-// glacier
-// "latitude": "48.68414678",
-// "longitude": "-113.8009306",
-
-
-// grant kohrs ranch
-// "latitude": "46.41358923",
-// "longitude": "-112.7467024",
-
-
-
-const startLocation = [-113.6458443, 45.64647324]
-
-
-
-// const orders = {
-//     type: "FeatureCollection",
-//     features: [{
-//       type: 'Feature',
-//       properties: {
-//         address: 'Start location',
-//         accepted: 'home'
-//       },
-//       geometry: {
-//         type: 'Point',
-//         coordinates: startLocation
-//       }
-//     }, {
-//         type: 'Feature',
-//         properties: {
-//           address: 'Fort Union',
-//           accepted: true
-//         },
-//         geometry: {
-//           type: 'Point',
-//           coordinates: [-104.0375238, 48.00075828]
-//         }
-//       }, 
-//       {
-//         type: 'Feature',
-//         properties: {
-//           address: 'Glacier',
-//           accepted: true
-//         },
-//         geometry: {
-//           type: 'Point',
-//           coordinates: [-113.8009306, 48.68414678]
-//         }
-//       },
-//       {
-//         type: 'Feature',
-//         properties: {
-//           address: 'Grant Kohrs Ranch',
-//           accepted: true
-//         },
-//         geometry: {
-//           type: 'Point',
-//           coordinates: [-112.7467024, 46.41358923]
-//         }
-//       }
-//     ]
-// }
-
 class RTestDirections extends React.Component {
-
-
 
     componentDidMount() {
 
@@ -107,14 +34,14 @@ class RTestDirections extends React.Component {
             orders.features.push(feature)
         })
 
-
+        const midLat = (places.map(place => parseFloat(place.latitude)).reduce((a, b) => a + b, 0))/(places.length)
+        const midLong = (places.map(place => parseFloat(place.longitude)).reduce((a, b) => a + b, 0))/(places.length)
 
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: startLocation,
+            center: [midLong, midLat],
             zoom: 5,
-            // transformRequest: transformRequest
         });
 
         this.handleMap(map, orders)
@@ -339,7 +266,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        joinPlaces: (places) => dispatch(joinPlaces(places))
+        joinPlaces: (places) => dispatch(joinPlaces(places)),
     }
 }
 

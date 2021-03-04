@@ -4,6 +4,7 @@ const initialState = {
     trip: null,
     dates: null, 
     places: null,
+    show: "Map"
 }
 
 const roadTripReducer = (state = initialState, action) => {
@@ -27,6 +28,10 @@ const roadTripReducer = (state = initialState, action) => {
         case 'JOIN_PLACES':
             return {
                 ...state, places: action.places
+            }
+        case 'SET_SHOW':
+            return {
+                ...state, show: action.show
             }
         default:
             return state
