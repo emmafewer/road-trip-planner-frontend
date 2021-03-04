@@ -91,7 +91,7 @@ const CampgroundSideCard = (props) => {
         //   </IconButton>
         // }
         title={props.campground.name}
-        // subheader="September 14, 2016"
+        subheader={props.state.placesReducer.parks.find(park => park.parkCode === props.campground.parkCode).fullName}
       />
       <CardMedia
         className={classes.media}
