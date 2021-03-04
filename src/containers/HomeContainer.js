@@ -5,7 +5,7 @@ import Campgrounds from '../components/Campgrounds.js'
 import State from '../components/State.js'
 import {connect} from 'react-redux'
 import { setAllParks } from '../redux/actions/placesActions'
-import Slider from '../components/Slider'
+import Slider from '../slider/Slider'
 
 const images = [
   'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
