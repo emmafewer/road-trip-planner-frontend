@@ -66,7 +66,7 @@ const CampgroundSideCard = (props) => {
       if (props.campground.images[0] !== undefined ) {
         return props.campground.images[0].url
       } else {
-        return "https://lh3.googleusercontent.com/proxy/9DYTFvUQeKcswSHh3U8poRVsvO2vPFZAHJXaTHAih0BAXtLXheEFEE7V0dSbqW0hsgcvecO90mbDR_um785KtDjX9C3F3s45mG7Z1HhCoZ_X1YXaRkDPXqU"      
+        return "https://i.pinimg.com/originals/32/ff/d2/32ffd2bf159d612782952c8864b580f6.png"      
       }
   }
 

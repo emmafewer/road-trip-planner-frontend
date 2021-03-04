@@ -9,8 +9,7 @@ import { setActivePanel } from '../redux/actions/placesActions';
 const SidePanel = (props) => {
     return (
       <div className="sidePanel">
-          <Container id="sidePanelContainer" >
-            <div>
+            <div style={{display: "flex", justifyContent: "center", paddingBottom: "1em", paddingTop: "1em", backgroundColor: "rgb(78, 82, 82)"}}>
                 <Button 
                 variant="contained" 
                 color="primary"
@@ -23,10 +22,13 @@ const SidePanel = (props) => {
                 variant="contained" 
                 color="primary"
                 onClick={props.setActivePanel}
+                style={{marginLeft: "1em"}}
                 >
                     Campgrounds
                 </Button>
             </div>
+          <Container id="sidePanelContainer" >
+
             {props.state.placesReducer.places.parks && props.state.placesReducer.active === "Parks" 
             ? props.state.placesReducer.places.parks.map(park => < ParkSideCard park={park}/>)
             : props.state.placesReducer.places.campgrounds.map(campground => < CampgroundSideCard campground={campground}/>)

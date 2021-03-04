@@ -1,6 +1,6 @@
 .App {
   height: 100vh;
-  background-color: black;
+  background-color: #fdf9df;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  /* background-color: white; */
   color: white;
 }
 
@@ -54,7 +54,7 @@ body {
   vertical-align: middle;
   align-items: center;
   position: relative;
-  margin-top: 3em;
+  /* margin-top: 3em; */
 }
 
 .homeForm {
@@ -75,7 +75,7 @@ body {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%) ;
-  padding-top: 2em;
+  /* padding-top: 2em; */
 }
 
 .showContainer {
@@ -103,6 +103,7 @@ body {
   overflow-y: scroll; 
   height: 100%;
   /* padding-right: 1em; */
+  background-color: rgb(78, 82, 82);
 }
 
 .MapNav {
@@ -221,4 +222,8 @@ body {
 
 .mapboxgl-popup-content-wrapper {
   padding: 1%;
+}
+
+.test {
+  background-color: #b5db82
 }
