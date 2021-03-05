@@ -33,6 +33,10 @@ const roadTripReducer = (state = initialState, action) => {
             return {
                 ...state, show: action.show
             }
+        case 'SET_TOTAL':
+            return {
+                ...state, tripTotal: action.tripTotal
+            }
         default:
             return state
     }

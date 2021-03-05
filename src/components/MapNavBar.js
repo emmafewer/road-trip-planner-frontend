@@ -30,7 +30,7 @@ const MapNavBar = (props) => {
             />
             <Button 
             variant="contained" 
-            color="secondary"
+            color="default"
             type="submit"
             >
                 Check Availability

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Draggable from 'react-draggable'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles({
   root: {
@@ -24,6 +25,14 @@ const useStyles = makeStyles({
 const RListItem = (props) => {
   const classes = useStyles();
 
+  const handleTime = () => {
+    if (props.place.duration > 90) {
+      return (`${(props.place.duration / 60).toFixed(2)} hours to next location`)
+    } else {
+      return (`${props.place.duration} minutes to next location`)
+    }
+  }
+
   return (
     <Grid container>
       <Grid item xs={2}>
@@ -39,7 +48,13 @@ const RListItem = (props) => {
         <Card className={classes.root}>
           <CardContent >
                 <Typography variant="h5" component="h2">
-                {props.place.name}
+                  {props.place.name}
+                </Typography>
+                <Typography variant="subtitle1" component="h2">
+                  {props.place.distance} miles to next location
+                </Typography>
+                <Typography variant="subtitle1" component="h2">
+                  {handleTime()}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
                 {/* {props.trip.start_date} - {props.trip.end_date} */}
@@ -51,4 +66,10 @@ const RListItem = (props) => {
   );
 }
 
-export default RListItem
+const mapStateToProps = state => {
+  return {
+      state: state
+  }
+}
+
+export default connect(mapStateToProps)(RListItem)

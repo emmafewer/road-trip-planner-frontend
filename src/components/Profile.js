@@ -46,7 +46,7 @@ class Profile extends React.Component {
     return (
         <div id="profile" className='container' style={{paddingBottom: "40px"}}>
             <h1 className='row justify-content-center'>Profile</h1>
-            <div>
+            <div style={{textAlign: "center"}}>
                 <h3>Name: {this.props.state.userReducer.user.name}</h3>
                 <h3>Username: {this.props.state.userReducer.user.username}</h3>
                 <form style={{paddingBottom: "2em"}} onSubmit={this.updateUser}>
@@ -54,8 +54,8 @@ class Profile extends React.Component {
                     <br></br>
                     <br></br>
                   <Button 
-                    variant="outlined" 
-                    color="secondary"
+                    variant="contained" 
+                    color="default"
                     type="submit"
                   >
                     Update Name
@@ -63,8 +63,8 @@ class Profile extends React.Component {
                 </form>
 
                 <Button 
-                  variant="outlined" 
-                  color="secondary"
+                  variant="contained" 
+                  color="default"
                   onClick={this.deleteUser}
                 >
                   Delete User

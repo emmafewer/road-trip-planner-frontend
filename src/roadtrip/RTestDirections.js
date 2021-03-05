@@ -2,7 +2,7 @@ import React from 'react'
 import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import {connect} from 'react-redux'
-import { joinPlaces } from '../redux/actions/roadTripActions'
+import { joinPlaces, setTotal } from '../redux/actions/roadTripActions'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw'
 
@@ -55,12 +55,14 @@ class RTestDirections extends React.Component {
             let newPlace = {}
             this.props.state.roadTripReducer.places.forEach(place => {
                 if (point.name === place.name) {
-                    newPlace = {order: point.waypoint_index, distance: trip.legs[point.waypoint_index].distance, ...place}
+                    newPlace = {order: point.waypoint_index, distance: (trip.legs[point.waypoint_index].distance / 1609.344).toFixed(1), duration: (trip.legs[point.waypoint_index].duration / 60).toFixed(0), ...place}
                     orderedArray.push(newPlace)
                 }
             })
         })
         this.props.joinPlaces(orderedArray)
+        // titleText = `${(trip.distance / 1609.344).toFixed(1)} miles |
+        //  ${(trip.duration / 60).toFixed(0)} minutes`
     }
 
     setTripLine = function(trip, map) {
@@ -127,7 +129,7 @@ class RTestDirections extends React.Component {
               });
     
             // Add the distance, duration, and turn-by-turn instructions to the sidebar
-            // this.setOverview(res);
+            this.setOverview(res)
     
             // Draw the route and stops on the map
             this.setTripLine(res.trips[0], map);
@@ -228,7 +230,9 @@ class RTestDirections extends React.Component {
         // Set some basic stats for the route in the sidebar
         // titleText = `${(trip.distance / 1609.344).toFixed(1)} miles | ${(trip.duration / 60).toFixed(0)} minutes`
         // addressList.innerText = '';
-        
+        let totalDist = (trip.distance / 1609.344).toFixed(1)
+        let totalDur = (trip.duration / 60 / 60).toFixed(0)
+        this.props.setTotal({totalDistance: totalDist, totalDuration: totalDur})
 
         // trip.legs.forEach((leg, i) => {
 
@@ -257,9 +261,7 @@ class RTestDirections extends React.Component {
 
     render() {
         return (
-            <div id="map">
-
-            </div>
+            <div id="map"></div>
         )
     }
 
@@ -274,6 +276,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         joinPlaces: (places) => dispatch(joinPlaces(places)),
+        setTotal: (total) => dispatch(setTotal(total))
     }
 }
 

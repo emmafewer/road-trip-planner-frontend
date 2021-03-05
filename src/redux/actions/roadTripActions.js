@@ -41,3 +41,10 @@ export const setShow = (e) => {
         show: e.target.innerHTML
     }
 }
+
+export const setTotal = (total) => {
+    return {
+        type: 'SET_TOTAL',
+        tripTotal: total
+    }
+}
