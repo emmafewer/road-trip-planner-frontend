@@ -14,7 +14,7 @@ class RShowMap extends React.Component {
     
             let map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
+                style: 'mapbox://styles/mapbox/outdoors-v11',
                 zoom: 5,
                 center: [midLong, midLat],
                 scrollZoom: true,

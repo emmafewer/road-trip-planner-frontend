@@ -57,6 +57,12 @@ const RoadTripCard= (props) => {
     .then(setNewRoadTrips(props))
   }
 
+  const formatDate = () => {
+    if (props.trip.start_date && props.trip.end_date) {
+      return (`${props.trip.start_date.toString().split("T")[0].slice(5)}-${props.trip.start_date.toString().split("T")[0].slice(0,4)} - ${props.trip.end_date.toString().split("T")[0].slice(5)}-${props.trip.end_date.toString().split("T")[0].slice(0,4)}`)
+    }
+  }
+
   return (
     <Box m={2} pt={3}>
         <Card className={classes.root} >
@@ -65,7 +71,7 @@ const RoadTripCard= (props) => {
             {props.trip.name}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-            {props.trip.start_date} - {props.trip.end_date}
+              {formatDate()}
             </Typography>
         </CardContent>
         <CardActions>

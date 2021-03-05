@@ -104,7 +104,7 @@ class RoadTripContainer extends React.Component {
                 {this.props.state.roadTripReducer.trip 
                 &&
                 <>
-                    <h1 style={{textAlign: "center"}}>{this.props.state.roadTripReducer.trip.name} {this.checkForDates()}</h1>
+                    <h1 style={{textAlign: "center", paddingTop: "2em"}}>{this.props.state.roadTripReducer.trip.name} {this.checkForDates()}</h1>
                     < RSidePanel />
                     <div className="rMapContainer">
                         < RMapNavBar />
