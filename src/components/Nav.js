@@ -17,7 +17,7 @@ import {connect} from 'react-redux'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    background: "#B2D08A"
+    background: "#618662"
     // #b5db82
     // #B2D08A
   },
@@ -60,7 +60,7 @@ const Nav = (props) => {
       <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Typography variant="h6" className={classes.title} onClick={() => handleClick('/')}>
-            Trip Planner
+            Park Planner
           </Typography>
             <div className={classes.rightToolbar}>
               {!localStorage.token

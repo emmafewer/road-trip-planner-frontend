@@ -10,7 +10,7 @@ class Map extends React.Component {
     componentDidMount() {
         let map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/emfewer/cklh3qovi01ot18skytaidnws',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
             zoom: 3,
             center: [-95.7129, 37.0902],
             scrollZoom: true,
@@ -124,10 +124,12 @@ class Map extends React.Component {
             const popup = new mapboxgl.Popup()
                 .setHTML('<div style="padding:0.3rem 0.3rem 0;text-align:center;">'
                 + '<h2 style="font-size:16px;margin:0 0 0.3rem;">' + marker.properties.name + '</h2>'
-                + '<p style="font-size:12px;margin:0;">Description: ' + marker.properties.description + '</p></div>')
+                + '<p style="font-size:12px;margin:0;">' + marker.properties.description + '</p></div>')
           
 
-            new mapboxgl.Marker()
+            const div = document.createElement('div')
+            div.className = 'marker'    
+            new mapboxgl.Marker(div)
                 .setLngLat(marker.geometry.coordinates)
                 .setPopup(popup)
                 .addTo(map);

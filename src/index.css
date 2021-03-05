@@ -1,6 +1,18 @@
 .App {
   height: 100vh;
-  background-color: #fdf9df;
+  /* background-color: #fdf9df; */
+
+
+}
+
+.bg {
+    background-image: url('./test1.jpg');
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 body {
@@ -12,6 +24,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* background-color: white; */
   color: white;
+
 }
 
 /* code { */
@@ -226,4 +239,13 @@ body {
 
 .test {
   background-color: #b5db82
+}
+
+.marker {
+  background-image: url('tree_icon_4.webp');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }

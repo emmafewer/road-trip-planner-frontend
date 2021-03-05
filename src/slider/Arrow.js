@@ -1,5 +1,9 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
 import React from 'react'
 import { css, jsx } from '@emotion/react'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const Arrow = ({ direction, handleClick }) => (
   <div
@@ -28,7 +32,7 @@ const Arrow = ({ direction, handleClick }) => (
       }
     `}
   >
-    {direction === 'right' ? <img src="https://dejpknyizje2n.cloudfront.net/svgcustom/clipart/preview/arrow-pointing-right-or-left-up-or-down-2617-13878-300x300.png" /> : <img src="https://png.pngtree.com/png-vector/20190411/ourlarge/pngtree-vector-left-arrow-icon-png-image_925725.jpg" />}
+    {direction === 'right' ? <ArrowForwardIosIcon />  : < ArrowBackIosIcon />}
   </div>
 )
 
