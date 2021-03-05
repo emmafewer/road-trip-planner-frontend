@@ -9,7 +9,7 @@ import { setActivePanel } from '../redux/actions/placesActions';
 const SidePanel = (props) => {
     return (
       <div className="sidePanel">
-            <div style={{display: "flex", justifyContent: "center", paddingBottom: "1em", paddingTop: "1em", backgroundColor: "rgb(78, 82, 82)"}}>
+            <div style={{display: "flex", justifyContent: "center", paddingBottom: "1em", paddingTop: "1em", backgroundColor: "white"}}>
                 <Button 
                 variant="contained" 
                 color="primary"

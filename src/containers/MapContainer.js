@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 const MapContainer = () => {
     return (
         <div className="mapContainer">
-            < MapNavBar />
+            {/* < MapNavBar /> */}
             < ShowMap />
         </div>
     )
