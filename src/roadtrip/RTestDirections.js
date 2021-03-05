@@ -47,13 +47,15 @@ class RTestDirections extends React.Component {
         this.handleMap(map, orders)
     }
 
-    updatePlacesProps = (waypoints) => {
+    updatePlacesProps = (res) => {
+        let waypoints = res.waypoints
+        let trip = res.trips[0]
         let orderedArray = []
         waypoints.forEach(point => {
             let newPlace = {}
             this.props.state.roadTripReducer.places.forEach(place => {
                 if (point.name === place.name) {
-                    newPlace = {order: point.waypoint_index, ...place}
+                    newPlace = {order: point.waypoint_index, distance: trip.legs[point.waypoint_index].distance, ...place}
                     orderedArray.push(newPlace)
                 }
             })
@@ -116,7 +118,7 @@ class RTestDirections extends React.Component {
             optimizeUrl += '&approaches=' + approachParam.repeat(coords.length - 1);
             
             // To inspect the response in the browser, remove for production
-            console.log(optimizeUrl);
+            // console.log(optimizeUrl);
             
             fetch(optimizeUrl).then((res) => res.json()).then((res) => {
               // Add the original address text to the waypoints
@@ -125,12 +127,12 @@ class RTestDirections extends React.Component {
               });
     
             // Add the distance, duration, and turn-by-turn instructions to the sidebar
-            // setOverview(res);
+            // this.setOverview(res);
     
             // Draw the route and stops on the map
             this.setTripLine(res.trips[0], map);
             this.setStops(res.waypoints, map);
-            this.updatePlacesProps(res.waypoints)
+            this.updatePlacesProps(res)
           })
         }
     }
@@ -219,34 +221,39 @@ class RTestDirections extends React.Component {
         })
     }
 
-    // setOverview = function(route) {
-    //     const trip = route.trips[0];
-    //     const waypoints = route.waypoints;
-    //     // Set some basic stats for the route in the sidebar
-    //     titleText.innerText = `${(trip.distance / 1609.344).toFixed(1)} miles | ${(trip.duration / 60).toFixed(0)} minutes`;
-    //     addressList.innerText = '';
-    
-    //     // Add the delivery addresses and turn-by-turn instructions to the sidebar for each leg of the trip
-    //     trip.legs.forEach((leg, i) => {
-    //       const listItem = document.createElement('li');
-    //       // We want the destination address when we depart, hence index + 1
-    //       if (i < trip.legs.length - 1) {
-    //         const nextDelivery = waypoints.find( ({waypoint_index}) => waypoint_index === i + 1);
-    //         console.log(nextDelivery);
-    //         listItem.innerHTML = `<b>Deliver to: ${nextDelivery.address}</b>`;
-    //       } else {
-    //         // We're outside the range of deliveries, so let's go home
-    //         listItem.innerHTML = `<b>Return to store</b>`;
-    //       }
-    //       addressList.appendChild(listItem);
-    //       // add the TBT instructions for this leg
-    //       leg.steps.forEach((step) => {
-    //         const listItem = document.createElement('li');
-    //                 listItem.innerText = step.maneuver.instruction;
-    //                 addressList.appendChild(listItem);
-    //       });
-    //     });
-    // }
+    setOverview = function(route) {
+        const trip = route.trips[0];
+        // const waypoints = route.waypoints;
+        // debugger
+        // Set some basic stats for the route in the sidebar
+        // titleText = `${(trip.distance / 1609.344).toFixed(1)} miles | ${(trip.duration / 60).toFixed(0)} minutes`
+        // addressList.innerText = '';
+        
+
+        // trip.legs.forEach((leg, i) => {
+
+        // })
+        // Add the delivery addresses and turn-by-turn instructions to the sidebar for each leg of the trip
+        // trip.legs.forEach((leg, i) => {
+        //   const listItem = document.createElement('li');
+          // We want the destination address when we depart, hence index + 1
+        //   if (i < trip.legs.length - 1) {
+        //     const nextDelivery = waypoints.find( ({waypoint_index}) => waypoint_index === i + 1);
+        //     console.log(nextDelivery);
+        //     listItem.innerHTML = `<b>Deliver to: ${nextDelivery.address}</b>`;
+        //   } else {
+            // We're outside the range of deliveries, so let's go home
+        //     listItem.innerHTML = `<b>Return to store</b>`;
+        //   }
+        //   addressList.appendChild(listItem);
+          // add the TBT instructions for this leg
+        //   leg.steps.forEach((step) => {
+        //     const listItem = document.createElement('li');
+        //             listItem.innerText = step.maneuver.instruction;
+        //             addressList.appendChild(listItem);
+        //   });
+        // });
+    }
 
     render() {
         return (
