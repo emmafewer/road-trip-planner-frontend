@@ -27,7 +27,7 @@ const RListItem = (props) => {
   return (
     <Grid container>
       <Grid item xs={2}>
-        <Card style={{height: "100%", backgroundColor: "#f50057"}} >
+        <Card style={{height: "100%", backgroundColor: "#e0e0e0"}} >
             <CardContent >
             <Typography variant="h5" component="h2" style={{fontWeight: "bold", fontSize: "32px", color: "white", textShadow: "1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000"}}>
                 {props.place.order}

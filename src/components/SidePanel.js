@@ -4,15 +4,37 @@ import ParkSideCard from './ParkSideCard'
 import CampgroundSideCard from './CampgroundSideCard'
 import { Container } from '@material-ui/core'
 import Button from '@material-ui/core/Button';
-import { setActivePanel } from '../redux/actions/placesActions';
+import { setActivePanel } from '../redux/actions/placesActions'
+import { setRoadTripList } from '../redux/actions/roadTripActions'
+import RoadTripDialog from './RoadTripDialog'
+
+const BASE_URL = 'http://localhost:4000'
 
 const SidePanel = (props) => {
+
+    const [open, setOpen] = React.useState(false);
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const handleClickOpen = (props) => {
+        setOpen(true);
+    
+        fetch(`${BASE_URL}/users/${props.state.userReducer.user.id}`,{
+            method: 'GET',
+            headers : {Authorization: `Bearer ${localStorage.token}`}, 
+          })
+          .then(res => res.json())
+          .then(user => props.setRoadTripList(user.road_trips))
+    }
+
     return (
       <div className="sidePanel">
             <div style={{display: "flex", justifyContent: "center", paddingBottom: "1em", paddingTop: "1em", backgroundColor: "white"}}>
                 <Button 
                 variant="contained" 
-                color="primary"
+                color="default"
                 onClick={props.setActivePanel}
                 >
                     Parks
@@ -20,12 +42,22 @@ const SidePanel = (props) => {
 
                 <Button 
                 variant="contained" 
-                color="primary"
+                color="default"
                 onClick={props.setActivePanel}
                 style={{marginLeft: "1em"}}
                 >
                     Campgrounds
                 </Button>
+
+                <Button 
+                variant="contained" 
+                color="default"
+                onClick={() => handleClickOpen(props)}
+                style={{marginLeft: "1em"}}
+                >
+                    My Road Trips
+                </Button>
+                < RoadTripDialog open={open} onClose={handleClose}/>
             </div>
           <Container id="sidePanelContainer" >
 
@@ -46,7 +78,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      setActivePanel: (button) => dispatch(setActivePanel(button))
+      setActivePanel: (button) => dispatch(setActivePanel(button)), 
+      setRoadTripList: (trips) => dispatch(setRoadTripList(trips))
     }
 }
   

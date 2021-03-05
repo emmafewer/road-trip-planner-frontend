@@ -22,9 +22,6 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
-  },
 });
 
 const RoadTripCard= (props) => {
@@ -70,7 +67,7 @@ const RoadTripCard= (props) => {
             <Typography variant="h5" component="h2">
             {props.trip.name}
             </Typography>
-            <Typography className={classes.pos} color="textSecondary">
+            <Typography color="textSecondary">
               {formatDate()}
             </Typography>
         </CardContent>

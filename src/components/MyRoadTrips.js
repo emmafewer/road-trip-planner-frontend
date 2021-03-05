@@ -22,10 +22,13 @@ class MyRoadTrips extends React.Component {
 
     render () {
         return (
-            <div className="myRoadTrips">
-                {this.props.state.roadTripReducer.trips
-                && 
-                this.props.state.roadTripReducer.trips.map(trip => <RoadTripCard trip={trip}/>)}
+            <div>
+                <h1 id="myRoadTripsTitle">{this.props.state.userReducer.user.name}'s Road Trips</h1>
+                <div className="myRoadTrips">
+                    {this.props.state.roadTripReducer.trips
+                    && 
+                    this.props.state.roadTripReducer.trips.map(trip => <RoadTripCard trip={trip}/>)}
+                </div>
             </div>
         )
     }

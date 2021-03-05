@@ -34,7 +34,7 @@ const RMapNavBar = (props) => {
         <div className="rMapNav">
             <Button 
             variant="contained" 
-            color="secondary"
+            color="default"
             type="submit"
             name="Main Map"
             onClick={(e) => props.setShow(e)}
@@ -44,7 +44,7 @@ const RMapNavBar = (props) => {
 
             <Button 
             variant="contained" 
-            color="secondary"
+            color="default"
             type="submit"
             >
                 Calendar
@@ -52,20 +52,27 @@ const RMapNavBar = (props) => {
 
             <Button 
             variant="contained" 
-            color="primary"
+            color="default"
             type="submit"
             >
                 Notes
             </Button>
             <Button 
             variant="contained" 
-            color="primary"
+            color="default"
             name="Route View"
             onClick={(e) => {
                 props.setShow(e)
                 props.setActivePanel(e)}}
             >
                 Route View
+            </Button>
+
+            <Button 
+            variant="outlined" 
+            color="default"
+            style={{display: 'inline-flex'}}
+            >Edit Dates
             </Button>
         </div>
     )

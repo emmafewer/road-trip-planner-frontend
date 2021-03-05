@@ -9,35 +9,29 @@ import RList from './RList'
 
 
 const RSidePanel = props => {
-   
+
     return (
         <div className="rSidePanel">
+            <div style={{display: "flex", justifyContent: "center", paddingBottom: "1em"}}>
+                <Button 
+                variant="contained" 
+                color="default"
+                onClick={props.setActivePanel}
+                >
+                    Parks
+                </Button>
+
+                <Button 
+                variant="contained" 
+                color="default"
+                style={{marginLeft: "1em"}}
+                onClick={props.setActivePanel}
+                >
+                    Campgrounds
+                </Button>
+            </div>
             <Container id="rSidePanelContainer" >
-                <div>
-                    <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={props.setActivePanel}
-                    >
-                        Parks
-                    </Button>
 
-                    <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={props.setActivePanel}
-                    >
-                        Campgrounds
-                    </Button>
-
-                    {/* <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={props.setActivePanel}
-                    >
-                        View All
-                    </Button> */}
-                </div>
                 {props.state.placesReducer.active === "Parks"
                 ? props.state.roadTripReducer.trip.parks.map(park => < RSideCard place={park}/>)
                 : props.state.placesReducer.active === "Campgrounds" 

@@ -22,13 +22,19 @@ const HomeForm = (props) => {
 
   const NPs =  props.state.placesReducer.parks.map(park => park.fullName)
  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!props.state.placesReducer.start || !props.state.placesReducer.end) {
+      alert("Please select a place from the drop-down")
+    } else {
+      props.setArea({start: props.state.placesReducer.start, end: props.state.placesReducer.end})
+      props.history.push('/places')
+    }
+  }
+
   return (
     <div className="homeForm">
-        <form style={{display: "flex"}} className={classes.root} noValidate autoComplete="on" onSubmit={(e) => {
-          e.preventDefault()
-          props.setArea({start: props.state.placesReducer.start, end: props.state.placesReducer.end})
-          props.history.push('/places')}}
-          >
+        <form style={{display: "flex"}} className={classes.root} noValidate autoComplete="on" onSubmit={handleSubmit}>
 
           <Autocomplete
             id="start"
@@ -54,7 +60,7 @@ const HomeForm = (props) => {
 
         <Button 
           variant="contained" 
-          color="secondary"
+          color="default"
           type="submit"
         >View Parks and Campgrounds</Button>
         

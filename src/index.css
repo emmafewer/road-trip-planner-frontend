@@ -22,8 +22,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: white; */
-  color: white;
 
 }
 
@@ -67,7 +65,7 @@ body {
   vertical-align: middle;
   align-items: center;
   position: relative;
-  
+
 }
 
 .homeForm {
@@ -76,7 +74,7 @@ body {
 }
 
 #profile {
-  color: white;
+  color: black;
   align-self: center;
 
 }
@@ -129,10 +127,6 @@ body {
   color: black;
 }
 
-.campAvailability {
-
-}
-
 .myRoadTrips {
   display: inline-flex;
   margin: 2em;
@@ -153,7 +147,7 @@ body {
 }
 
 .roadTripContainer {
-  color: white;
+  color: black;
   height: 80vh;
   width: 160vh;
   /* padding-top: 5em; */
@@ -244,4 +238,8 @@ body {
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+#myRoadTripsTitle {
+  text-align: center;
 }

@@ -53,12 +53,12 @@ class RoadTripContainer extends React.Component {
                 <div >
                 <h3>
                     {`${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.start_date.split("T")[0].slice(0,4)} - ${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(5)}-${this.props.state.roadTripReducer.trip.end_date.split("T")[0].slice(0,4)}   `}
-                    <Button 
+                    {/* <Button 
                         variant="outlined" 
-                        color="secondary"
+                        color="default"
                         style={{display: 'inline-flex'}}
                     >Edit Dates
-                    </Button>
+                    </Button> */}
                 </h3>
                 {/* // <DayPickerRangeController
                 //     startDate={this.state.startDate} // momentPropTypes.momentObj or null,
@@ -83,12 +83,13 @@ class RoadTripContainer extends React.Component {
                         focusedInput={this.state.focusedInput}
                         onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
                     />
-
-                    <Button 
-                        variant="outlined" 
-                        color="secondary"
-                        type="submit"
-                    >Set Dates</Button>
+                    {this.state.startDate && this.state.endDate &&
+                        <Button 
+                            variant="outlined" 
+                            color="default"
+                            type="submit"
+                        >Set Dates</Button>
+                    }
                   
                 </form>
             )
