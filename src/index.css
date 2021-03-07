@@ -244,3 +244,11 @@ body {
   text-align: center;
 }
 
+.activeMarker {
+  background-image: url('tree_icon_3.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}

@@ -38,11 +38,14 @@ class ShowMap extends React.Component {
                     },
                     'properties' : {
                         'name' : park.name,
-                        'description' : park.description
+                        'description' : park.description,
+                        'id': park.id
                     }
                 }
                 features.push(feature)
             })
+            
+            // this.props.setFeatures
 
             map.addSource("locations", {
                 "type": "geojson",
@@ -60,7 +63,19 @@ class ShowMap extends React.Component {
                     + '<p style="font-size:12px;margin:0;">Description: ' + marker.properties.description + '</p></div>')
             
 
-                new mapboxgl.Marker()
+                // new mapboxgl.Marker()
+                //     .setLngLat(marker.geometry.coordinates)
+                //     .setPopup(popup)
+                //     .addTo(map);
+                
+                const div = document.createElement('div')
+                if (marker.properties.id === this.props.state.mapReducer.activeFeature) {
+                    div.className = 'activeMarker'
+                } else {
+                    div.className = 'marker'  
+                }
+                  
+                new mapboxgl.Marker(div)
                     .setLngLat(marker.geometry.coordinates)
                     .setPopup(popup)
                     .addTo(map);

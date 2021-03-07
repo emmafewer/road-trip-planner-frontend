@@ -14,7 +14,10 @@ import AddIcon from '@material-ui/icons/Add';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import CampgroundDialog from './CampgroundDialog'
 import { setRoadTripList } from '../redux/actions/roadTripActions';
+import { setActiveFeature } from '../redux/actions/mapActions';
 import {connect} from 'react-redux'
+
+
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -83,7 +86,7 @@ const CampgroundSideCard = (props) => {
   }
 
   return (
-    <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}}>
+    <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}} onClick={() => props.setActiveFeature(props.campground.id)}>
       <CardHeader
         // action={
         //   <IconButton aria-label="settings">
@@ -148,7 +151,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      setRoadTripList: (trips) => dispatch(setRoadTripList(trips))
+      setRoadTripList: (trips) => dispatch(setRoadTripList(trips)),
+      setActiveFeature: (campground) => dispatch(setActiveFeature(campground))
     }
 }
 
