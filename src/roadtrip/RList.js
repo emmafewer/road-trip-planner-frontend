@@ -19,7 +19,7 @@ const RList= (props) => {
     return (
       <div className="fullList">
         {props.state.roadTripReducer.tripTotal &&
-          <Card style={{height: "100%", width: "94%", textAlign: "center"}} >
+          <Card style={{height: "100%", width: "98%", textAlign: "center"}} >
             <CardContent >
               <Typography Typography variant="h5" component="h2">
                 {props.state.roadTripReducer.trip.name}

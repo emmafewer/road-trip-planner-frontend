@@ -12,7 +12,7 @@ import {connect} from 'react-redux'
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 300,
   },
   title: {
     fontSize: 14,

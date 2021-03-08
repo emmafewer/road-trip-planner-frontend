@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '40.25%', // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -109,7 +109,7 @@ const RSideCard = (props) => {
         className={classes.media}
         image={getImageUrl(props)}
       />
-      <CardActions disableSpacing>
+      <CardActions disableSpacing style={{margin: 0}}>
         <IconButton 
             aria-label="delete from road trip"
             color="inherit" 

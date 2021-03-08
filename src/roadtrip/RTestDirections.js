@@ -124,7 +124,7 @@ class RTestDirections extends React.Component {
             
             fetch(optimizeUrl).then((res) => res.json()).then((res) => {
               // Add the original address text to the waypoints
-              debugger
+              // debugger
               res.waypoints.forEach((waypoint, i) => {
                 waypoint.name = waypoint[i] == 0 ? 'Start' : deliverable[i].properties.name;
               });
