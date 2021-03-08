@@ -86,7 +86,7 @@ const CampgroundSideCard = (props) => {
   }
 
   return (
-    <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}} onClick={() => props.setActiveFeature(props.campground.id)}>
+    <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}} onClick={() => console.log(props.state.mapReducer.features)}>
       <CardHeader
         // action={
         //   <IconButton aria-label="settings">

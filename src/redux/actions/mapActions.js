@@ -5,9 +5,9 @@ export const setActiveFeature = (id) => {
     }
 }
 
-export const setMap = (map) => {
+export const setFeatures = (features) => {
     return {
-        type: 'SET_MAP',
-        map: map,
+        type: 'SET_FEATURES',
+        features: features,
     }
 }

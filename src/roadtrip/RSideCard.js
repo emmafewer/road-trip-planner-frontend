@@ -52,19 +52,11 @@ const RSideCard = (props) => {
   };
 
   const getImageUrl = (props) => {
-      if (props.place.images !== undefined) {
-        return props.place.images[0].url
+      if (props.place.image) {
+        return props.place.image
       } else {
         return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSEcx8TdMdVfPYsB494JJm8jowH9FnwXwCgQ&usqp=CAU"      
       }
-  }
-
-  const getImageDesc = (props) => {
-    if (props.place.images !== undefined) {
-      return props.place.images[0].caption
-    } else {
-      return ""      
-    }
   }
 
   const goToWebsite = (props) => {
@@ -99,23 +91,24 @@ const RSideCard = (props) => {
         })
         .then(fetchTrip(props))
     }
+  }
 
+  const getSubheader = () => {
+    if (props.state.placesReducer.active === "Campgrounds") {
+      return (props.state.placesReducer.parks.find(park => park.parkCode === props.place.park_code).fullName)
+    }
   }
 
   return (
-    <Card className={classes.root} style={{maxHeight: '100%'}}>
+    <Card className={classes.root} style={{maxHeight: '100%'}} >
       <CardHeader
         title={props.place.name}
-      />
+        subheader={getSubheader()}
+        />
       <CardMedia
         className={classes.media}
         image={getImageUrl(props)}
       />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {getImageDesc(props)}
-        </Typography>
-      </CardContent>
       <CardActions disableSpacing>
         <IconButton 
             aria-label="delete from road trip"

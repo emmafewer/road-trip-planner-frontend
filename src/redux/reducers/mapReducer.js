@@ -8,6 +8,10 @@ const mapReducer = (state = initialState, action) => {
             return {
                 ...state, activeFeature: action.activeFeature
             }
+        case 'SET_FEATURES':
+            return {
+                ...state, features: action.features
+            }
         default:
             return state
     }

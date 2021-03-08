@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import mapboxgl from 'mapbox-gl'
+import { setFeatures } from '../redux/actions/mapActions';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxczA4Zzg1In0.P87Yiu97CtgjPvN4JoYCrw'
 
@@ -45,7 +46,7 @@ class ShowMap extends React.Component {
                 features.push(feature)
             })
             
-            // this.props.setFeatures
+            
 
             map.addSource("locations", {
                 "type": "geojson",
@@ -54,7 +55,7 @@ class ShowMap extends React.Component {
                     "features": features
                 }
             })
-
+            // let testArr = []
             features.forEach(marker => {
 
                 const popup = new mapboxgl.Popup()
@@ -79,7 +80,9 @@ class ShowMap extends React.Component {
                     .setLngLat(marker.geometry.coordinates)
                     .setPopup(popup)
                     .addTo(map);
-            });
+
+            })
+            // this.props.setFeatures(testArr)
         })
 
     }
@@ -87,8 +90,7 @@ class ShowMap extends React.Component {
     render () {
         return (
             <div >
-                <div id="map" style={{maxHeight: '100%', maxWidth: '100%'}}>
-                </div>
+                <div id="map" style={{maxHeight: '100%', maxWidth: '100%'}}></div>
             </div>
 
         );
@@ -100,6 +102,12 @@ const mapStateToProps = state => {
         state: state
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setFeatures: (features) => dispatch(setFeatures(features)),
+    }
+}
   
 
-export default connect(mapStateToProps)(ShowMap)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowMap)
