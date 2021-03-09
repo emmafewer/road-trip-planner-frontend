@@ -253,6 +253,24 @@ body {
   cursor: pointer;
 }
 
+.treeMarker {
+  background-image: url('tree_icon_9.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tentMarker {
+  background-image: url('tent-icon-2.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 #myRoadTripsTitle {
   text-align: center;
 }

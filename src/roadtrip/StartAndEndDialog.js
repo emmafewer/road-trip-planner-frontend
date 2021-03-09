@@ -71,11 +71,11 @@ const StartAndEndDialog = (props) => {
             variant="contained" 
             color="default"
             name="Route View"
-            onClick={(e) => {
+            onClick={() => {
               handleSubmit()
               handleClose()
-              props.setShow(e)
-              props.setActivePanel(e)
+              props.setShow("Route View")
+              props.setActivePanel("Route View")
             }}
           >Route View</Button>
       </Dialog>

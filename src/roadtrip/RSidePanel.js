@@ -16,7 +16,7 @@ const RSidePanel = props => {
                 <Button 
                 variant="contained" 
                 color="default"
-                onClick={props.setActivePanel}
+                onClick={() => props.setActivePanel("Parks")}
                 >
                     Parks
                 </Button>
@@ -25,7 +25,7 @@ const RSidePanel = props => {
                 variant="contained" 
                 color="default"
                 style={{marginLeft: "1em"}}
-                onClick={props.setActivePanel}
+                onClick={() => props.setActivePanel("Campgrounds")}
                 >
                     Campgrounds
                 </Button>

@@ -7,10 +7,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1mZXdlciIsImEiOiJja2xneTM5aHE0M2h0Mm9wZWIxc
 class RShowMap extends React.Component {
 
     componentDidMount() {
-        if (this.props.state.roadTripReducer.trip && this.props.state.roadTripReducer.trip.parks) {
-            const { parks } = this.props.state.roadTripReducer.trip
-            const midLat = (parks.map(park => parseFloat(park.latitude)).reduce((a, b) => a + b, 0))/(parks.length)
-            const midLong = (parks.map(park => parseFloat(park.longitude)).reduce((a, b) => a + b, 0))/(parks.length)
+        if (this.props.state.roadTripReducer.places) {
+            const { places } = this.props.state.roadTripReducer
+            const midLat = (places.map(place => parseFloat(place.latitude)).reduce((a, b) => a + b, 0))/(places.length)
+            const midLong = (places.map(place => parseFloat(place.longitude)).reduce((a, b) => a + b, 0))/(places.length)
     
             let map = new mapboxgl.Map({
                 container: 'map',
@@ -25,11 +25,11 @@ class RShowMap extends React.Component {
     }
 
     getParkMarkers = (map) => {
-        const { parks, campgrounds } = this.props.state.roadTripReducer.trip
+        const { places } = this.props.state.roadTripReducer
         
         map.on('load', () => {
             const features = []
-            campgrounds.forEach( park => {
+            places.forEach( park => {
                 let feature = {
                     'type' : 'Feature',
                     'geometry' : {
@@ -38,7 +38,8 @@ class RShowMap extends React.Component {
                     },
                     'properties' : {
                         'name' : park.name,
-                        'description' : park.description
+                        'description' : park.description,
+                        'designation' : park.designation
                     }
                 }
                 features.push(feature)
@@ -59,11 +60,23 @@ class RShowMap extends React.Component {
                     + '<h2 style="font-size:16px;margin:0 0 0.3rem;">' + marker.properties.name + '</h2>'
                     + '<p style="font-size:12px;margin:0;">Description: ' + marker.properties.description + '</p></div>')
             
-
-                new mapboxgl.Marker()
+               
+                if (marker.properties.designation !== undefined) {
+                    const div = document.createElement('div')
+                    div.className = 'treeMarker' 
+                    new mapboxgl.Marker(div)
+                    .setLngLat(marker.geometry.coordinates)
+                    .setPopup(popup)
+                    .addTo(map); 
+                } else {
+                    const div = document.createElement('div')
+                    div.className = 'tentMarker' 
+                    new mapboxgl.Marker(div)
                     .setLngLat(marker.geometry.coordinates)
                     .setPopup(popup)
                     .addTo(map);
+                }
+
             });
         })
 

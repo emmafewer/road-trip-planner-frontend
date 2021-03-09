@@ -1,9 +1,9 @@
 const initialState = {
     newTripInput: null,
     trips: null,
-    trip: null,
+    trip: "",
     dates: null, 
-    places: null,
+    places: "",
     show: "Map"
 }
 

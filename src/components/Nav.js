@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom'
 import { logout } from '../redux/actions/userActions'
 import {connect} from 'react-redux'
+import { joinPlaces, setTrip, setShow } from '../redux/actions/roadTripActions';
+import { setActivePanel } from '../redux/actions/placesActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +61,16 @@ const Nav = (props) => {
     <div >
       <AppBar position="static" className={classes.root}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title} onClick={() => handleClick('/')}>
+          <Typography 
+            variant="h6" 
+            className={classes.title} 
+            onClick={() => {
+              handleClick('/')
+              props.joinPlaces("")
+              props.setTrip("")
+              props.setShow("Map")
+              props.setActivePanel("Parks")
+            }}>
             Park Planner
           </Typography>
             <div className={classes.rightToolbar}>
@@ -106,7 +117,12 @@ const Nav = (props) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={() => handleClick('/profile')}>Profile</MenuItem>
-                <MenuItem onClick={() => handleClick('/road_trips')}>My Road Trips</MenuItem>
+                <MenuItem onClick={() => {
+                  handleClick('/road_trips')
+                  props.joinPlaces("")
+                  props.setTrip("")
+                  props.setShow("Map")
+                  props.setActivePanel("Parks")}}>My Road Trips</MenuItem>
                 <MenuItem onClick={() => {
                   props.logout()
                   handleLogout()
@@ -124,7 +140,11 @@ const Nav = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      logout: () => dispatch(logout())
+      logout: () => dispatch(logout()),
+      joinPlaces: (empty) => dispatch(joinPlaces(empty)),
+      setTrip: (empty) => dispatch(setTrip(empty)),
+      setShow: (string) => dispatch(setShow(string)),
+      setActivePanel: (string) => dispatch(setActivePanel(string))
   }
 }
 

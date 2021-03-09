@@ -35,10 +35,10 @@ export const joinPlaces = (places) => {
     }
 }
 
-export const setShow = (e) => {
+export const setShow = (view) => {
     return {
         type: 'SET_SHOW',
-        show: e.target.innerHTML
+        show: view
     }
 }
 

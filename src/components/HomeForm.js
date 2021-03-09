@@ -34,7 +34,12 @@ const HomeForm = (props) => {
 
   return (
     <div className="homeForm">
-        <form style={{display: "flex"}} className={classes.root} noValidate autoComplete="on" onSubmit={handleSubmit}>
+        <form 
+          style={{display: "flex"}} 
+          className={classes.root} 
+          noValidate autoComplete="on" 
+          onSubmit={handleSubmit}
+        >
 
           <Autocomplete
             id="start"
@@ -82,8 +87,5 @@ const mapDispatchToProps = (dispatch) => {
     setArea: (area) => dispatch(setArea(area)),
   }
 }
-
-
-
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeForm))

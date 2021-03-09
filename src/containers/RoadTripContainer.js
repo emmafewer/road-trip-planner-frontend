@@ -100,9 +100,9 @@ class RoadTripContainer extends React.Component {
         return (
             <div className="roadTripContainer">
 
-                {this.props.state.roadTripReducer.places ? null : this.setPlaces()}
+                {this.props.state.roadTripReducer.places !== "" ? null : this.setPlaces()}
 
-                {this.props.state.roadTripReducer.trip 
+                {this.props.state.roadTripReducer.trip !== "" 
                 &&
                 <>
                     <h1 style={{textAlign: "center", paddingTop: "50px"}}>{this.props.state.roadTripReducer.trip.name} {this.checkForDates()}</h1>
@@ -134,6 +134,6 @@ const mapDispatchToProps = (dispatch) => {
         setTrip: (trip) => dispatch(setTrip(trip)),
         joinPlaces: (places) => dispatch(joinPlaces(places)),
     }
-  }
+}
   
 export default connect(mapStateToProps, mapDispatchToProps)(RoadTripContainer)

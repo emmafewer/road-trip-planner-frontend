@@ -24,7 +24,7 @@ const RMapNavBar = (props) => {
             color="default"
             type="submit"
             name="Main Map"
-            onClick={(e) => props.setShow(e)}
+            onClick={() => props.setShow("Map")}
             >
                 Map
             </Button>

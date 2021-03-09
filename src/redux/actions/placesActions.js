@@ -26,10 +26,10 @@ export const setFilteredParks = (places) => {
     }
 }
 
-export const setActivePanel = (e) => {
+export const setActivePanel = (tab) => {
     return {
         type: 'SET_ACTIVE_PANEL',
-        active: e.target.innerHTML
+        active: tab
     }
 }
 
