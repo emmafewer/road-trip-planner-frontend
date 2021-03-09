@@ -60,7 +60,7 @@ const RSideCard = (props) => {
   }
 
   const goToWebsite = (props) => {
-      return alert(props.place.url)
+    return (window.open(props.place.url))
   }
 
   const fetchTrip = (props) => {

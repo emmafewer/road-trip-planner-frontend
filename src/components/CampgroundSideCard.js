@@ -16,6 +16,7 @@ import CampgroundDialog from './CampgroundDialog'
 import { setRoadTripList } from '../redux/actions/roadTripActions';
 import { setActiveFeature } from '../redux/actions/mapActions';
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 
 
 
@@ -81,8 +82,8 @@ const CampgroundSideCard = (props) => {
     }
   }
 
-  const goToWebsite = (props) => {
-      return alert(props.campground.url)
+  const goToWebsite = () => {
+      return (window.open(props.campground.url))
   }
 
   return (
@@ -115,7 +116,7 @@ const CampgroundSideCard = (props) => {
           <AddIcon />
         </IconButton>
         <CampgroundDialog open={open} onClose={handleClose} campground={props.campground}/>
-        <IconButton aria-label="website" onClick={() => goToWebsite(props)}>
+        <IconButton aria-label="website" onClick={() => goToWebsite()}>
           <OpenInNewIcon />
         </IconButton>
         <IconButton

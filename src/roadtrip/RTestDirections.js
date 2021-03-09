@@ -113,7 +113,7 @@ class RTestDirections extends React.Component {
           round_trip = false
         }
 
-        if (deliverable.length > 2) {
+        if (deliverable.length > 1) {
             const coords = [];
             
             deliverable.forEach((delivery) => {

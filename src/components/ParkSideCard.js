@@ -79,19 +79,13 @@ const ParkSideCard = (props) => {
   }
 
   const goToWebsite = (props) => {
-      return alert(props.park.url)
+      return (window.open(props.park.url))
   }
 
   return (
     <Card className={classes.root} style={{maxHeight: '100%', overflow: 'auto'}}>
       <CardHeader
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
         title={props.park.fullName}
-        // subheader="September 14, 2016"
       />
       <CardMedia
         className={classes.media}
