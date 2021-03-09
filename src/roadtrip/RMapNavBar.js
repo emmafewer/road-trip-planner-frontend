@@ -13,22 +13,9 @@ const RMapNavBar = (props) => {
         setOpen(false);
     }
 
-    // const setStartAndEnd = (props) => {
-    //     return ( <StartAndEndDialog open={open} onClose={handleClose}/>)
-    // }
-
-    const addPlacestoProps = (props) => {
-        let campgrounds = props.state.roadTripReducer.trip.campgrounds
-        let parks = props.state.roadTripReducer.trip.parks
-        let places = campgrounds.concat(parks)
-        props.joinPlaces(places)
-        // setStartAndEnd(props)
+    const handleClickOpen = (props) => {
+        setOpen(true);
     }
-
-    // const handleShow = (e, props) => {
-    //     debugger
-    //     props.setShow(e.target.name)
-    // }
 
     return (
         <div className="rMapNav">
@@ -61,12 +48,11 @@ const RMapNavBar = (props) => {
             variant="contained" 
             color="default"
             name="Route View"
-            onClick={(e) => {
-                props.setShow(e)
-                props.setActivePanel(e)}}
+            onClick={() => handleClickOpen(props)}
             >
                 Route View
             </Button>
+            < StartAndEndDialog open={open} onClose={handleClose}/>
 
             <Button 
             variant="outlined" 

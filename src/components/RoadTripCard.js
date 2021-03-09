@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box'
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { setRoadTripList, setTrip } from '../redux/actions/roadTripActions'
+import { setRoadTripList, setTrip, joinPlaces } from '../redux/actions/roadTripActions'
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -99,7 +99,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setTrip: (trip) => dispatch(setTrip(trip)),
-        setRoadTripList: (trips) => dispatch(setRoadTripList(trips))
+        setRoadTripList: (trips) => dispatch(setRoadTripList(trips)),
     }
 }
 

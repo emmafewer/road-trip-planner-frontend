@@ -28,8 +28,14 @@ const RListItem = (props) => {
   const handleTime = () => {
     if (props.place.duration > 90) {
       return (`${(props.place.duration / 60).toFixed(2)} hours to next location`)
-    } else {
+    } else if (props.place.duration !== null) {
       return (`${props.place.duration} minutes to next location`)
+    } 
+  }
+
+  const handleMiles = () => {
+    if (props.place.distance !== null) {
+      return (`${props.place.distance} miles to next location`)
     }
   }
 
@@ -51,7 +57,7 @@ const RListItem = (props) => {
                   {props.place.name}
                 </Typography>
                 <Typography variant="subtitle1" component="h2">
-                  {props.place.distance} miles to next location
+                  {handleMiles()}
                 </Typography>
                 <Typography variant="subtitle1" component="h2">
                   {handleTime()}

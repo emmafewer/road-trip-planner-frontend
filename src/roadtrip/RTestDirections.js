@@ -10,9 +10,7 @@ class RTestDirections extends React.Component {
 
     componentDidMount() {
 
-        let campgrounds = this.props.state.roadTripReducer.trip.campgrounds
-        let parks = this.props.state.roadTripReducer.trip.parks
-        let places = campgrounds.concat(parks)
+        const { places } = this.props.state.roadTripReducer
     
         const orders = {
             type: "FeatureCollection",
@@ -55,8 +53,13 @@ class RTestDirections extends React.Component {
             let newPlace = {}
             this.props.state.roadTripReducer.places.forEach(place => {
                 if (point.name === place.name) {
-                    newPlace = {order: point.waypoint_index, distance: (trip.legs[point.waypoint_index].distance / 1609.344).toFixed(1), duration: (trip.legs[point.waypoint_index].duration / 60).toFixed(0), ...place}
-                    orderedArray.push(newPlace)
+                    if (trip.legs[point.waypoint_index] === undefined) {
+                      newPlace = {order: point.waypoint_index, distance: null, duration: null, ...place}
+                      orderedArray.push(newPlace)
+                    } else {
+                      newPlace = {order: point.waypoint_index, distance: (trip.legs[point.waypoint_index].distance / 1609.344).toFixed(1), duration: (trip.legs[point.waypoint_index].duration / 60).toFixed(0), ...place}
+                      orderedArray.push(newPlace)
+                    }
                 }
             })
         })
@@ -104,7 +107,12 @@ class RTestDirections extends React.Component {
 
     getDeliveryRoute = (map, orders) => {
         const deliverable = orders.features
-        // Once there are 2 deliveries, get the delivery route
+       
+        let round_trip = true
+        if (this.props.state.mapReducer.routeType === "One-Way") {
+          round_trip = false
+        }
+
         if (deliverable.length > 2) {
             const coords = [];
             
@@ -118,6 +126,9 @@ class RTestDirections extends React.Component {
             optimizeUrl += '?access_token=' + mapboxgl.accessToken;
             optimizeUrl += '&geometries=geojson&overview=full&steps=false';
             optimizeUrl += '&approaches=' + approachParam.repeat(coords.length - 1);
+            optimizeUrl += '&source=first&destination=last'
+            optimizeUrl += '&roundtrip=' + round_trip;
+            
             
             // To inspect the response in the browser, remove for production
             // console.log(optimizeUrl);
@@ -227,7 +238,6 @@ class RTestDirections extends React.Component {
     setOverview = function(route) {
         const trip = route.trips[0];
         // const waypoints = route.waypoints;
-        // debugger
         // Set some basic stats for the route in the sidebar
         // titleText = `${(trip.distance / 1609.344).toFixed(1)} miles | ${(trip.duration / 60).toFixed(0)} minutes`
         // addressList.innerText = '';
@@ -262,7 +272,11 @@ class RTestDirections extends React.Component {
 
     render() {
         return (
-            <div id="map"></div>
+          <>
+            {this.props.state.roadTripReducer.places[0].name === this.props.state.mapReducer.start &&
+              <div id="map"></div>
+            }
+          </>
         )
     }
 
