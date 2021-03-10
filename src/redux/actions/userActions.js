@@ -3,7 +3,7 @@ export const handleOnChange = (e) => {
         type: 'FORM_INPUT',
         key: e.target.name,
         value: e.target.value,
-        formType: e.target.parentElement.className
+        formType: e.target.form.className
     }
 }
 

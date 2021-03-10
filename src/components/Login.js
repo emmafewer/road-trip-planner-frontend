@@ -2,6 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { handleOnChange, setUser } from '../redux/actions/userActions'
 import { withRouter } from 'react-router-dom'
+import TextField from '@material-ui/core/TextField'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import LockIcon from '@material-ui/icons/Lock'
+import Button from '@material-ui/core/Button'
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -32,16 +37,16 @@ class Login extends React.Component {
     render(){
         return(
             <div className="userContainer">
-                <h1>Login</h1>
+                <h3>Login</h3>
                 <form className="login" onSubmit={this.login}>
-                    <input 
+                    <TextField
                         type="text" 
                         name="username" 
                         placeholder="Username" 
                         onChange={this.props.handleOnChange}
                     />
                     <br/>
-                    <input
+                    <TextField
                         type="password"
                         name="password"
                         placeholder="Password"
@@ -49,10 +54,12 @@ class Login extends React.Component {
                     />
                     <br/>
                     <br/>
-                    <input
+                    <Button
+                        variant="contained" 
+                        style={{backgroundColor: "#618662", color: "white"}}
                         type="submit"
                         value="Login"
-                    />
+                    >Login</Button>
                 </form>
             </div>
         )

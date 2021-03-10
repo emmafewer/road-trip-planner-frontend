@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import { setUser } from '../redux/actions/userActions'
 import { setRoadTripList } from '../redux/actions/roadTripActions'
 import { withRouter } from 'react-router-dom'
+import TextField from '@material-ui/core/TextField'
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -45,18 +46,17 @@ class Profile extends React.Component {
   render() {
     return (
         <div id="profile" className='userContainer'>
-            <h1 className='row justify-content-center'>Profile</h1>
+            <h2 className='row justify-content-center'>Profile</h2>
             <div style={{textAlign: "center"}}>
-                <h3>Name: {this.props.state.userReducer.user.name}</h3>
-                <h3>Username: {this.props.state.userReducer.user.username}</h3>
+                <h5>Name: {this.props.state.userReducer.user.name}</h5>
+                <h5>Username: {this.props.state.userReducer.user.username}</h5>
+                <br></br>
                 <form style={{paddingBottom: "2em"}} onSubmit={this.updateUser}>
-                    <input type="text" name="name" placeholder="Update Name"/>
-                    <br></br>
-                    <br></br>
+                  <TextField variant="outlined" type="text" name="name" placeholder="Update Name"/>
                   <Button 
                     variant="contained" 
-                    color="default"
                     type="submit"
+                    style={{height: "54px", backgroundColor: "#618662", color: "white"}}
                   >
                     Update Name
                   </Button>
@@ -64,7 +64,7 @@ class Profile extends React.Component {
 
                 <Button 
                   variant="contained" 
-                  color="default"
+                  style={{backgroundColor: "#d11a2a", color: "white"}}
                   onClick={this.deleteUser}
                 >
                   Delete User

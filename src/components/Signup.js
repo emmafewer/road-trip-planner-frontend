@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { handleOnChange, setUser } from '../redux/actions/userActions'
 import { withRouter } from 'react-router-dom'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -32,23 +34,23 @@ class Signup extends React.Component {
     render(){
         return(
             <div className="userContainer">
-                <h1>SignUp</h1>
+                <h3>SignUp</h3>
                 <form className="signup" onSubmit={this.signup}>
-                    <input 
+                    <TextField 
                         type="text" 
                         name="username" 
                         placeholder="Username" 
                         onChange={this.props.handleOnChange}
                     />
                     <br/>
-                    <input
+                    <TextField
                         type="password"
                         name="password"
                         placeholder="Password"
                         onChange={this.props.handleOnChange}
                     />
                     <br/>
-                    <input
+                    <TextField
                         type="text"
                         name="name"
                         placeholder="Name"
@@ -57,10 +59,12 @@ class Signup extends React.Component {
 
                     <br/>
                     <br/>
-                    <input
+                    <Button
+                        variant="contained" 
+                        style={{backgroundColor: "#618662", color: "white"}}
                         type="submit"
                         value="Signup"
-                    />
+                    >SignUp</Button >
                 </form>
             </div>
         )

@@ -29,37 +29,38 @@ const RMapNavBar = (props) => {
                 Map
             </Button>
 
-            <Button 
+            {/* <Button 
             variant="contained" 
             color="default"
             type="submit"
             >
                 Calendar
-            </Button>
+            </Button> */}
 
-            <Button 
+            {/* <Button 
             variant="contained" 
             color="default"
             type="submit"
             >
                 Notes
-            </Button>
+            </Button> */}
             <Button 
             variant="contained" 
             color="default"
             name="Route View"
+            style={{marginLeft: "1em"}}
             onClick={() => handleClickOpen(props)}
             >
                 Route View
             </Button>
             < StartAndEndDialog open={open} onClose={handleClose}/>
 
-            <Button 
+            {/* <Button 
             variant="outlined" 
             color="default"
             style={{display: 'inline-flex'}}
             >Edit Dates
-            </Button>
+            </Button> */}
         </div>
     )
 }

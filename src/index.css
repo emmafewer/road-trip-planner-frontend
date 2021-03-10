@@ -151,6 +151,7 @@ body {
   float: left;
   height: 80vh;
   padding-right: 1em;
+  padding-top: 125px;
 }
 
 #rSidePanelContainer {
@@ -164,6 +165,7 @@ body {
   height: 100vh;
   width: 160vh;
   /* overflow-y: hidden; */
+  padding-top: 30px;
 }
 
 .rMapContainer {
@@ -295,7 +297,12 @@ body {
 
 .userContainer {
   padding: 50px;
-  background-color: rgb(209, 206, 206);
+  /* background-color: #e0e0e0; */
   text-align: center;
-  /* #618662 */
+  background-color: white;
+}
+
+.rMapNav {
+  text-align: center;
+  padding-right: 120px;
 }
