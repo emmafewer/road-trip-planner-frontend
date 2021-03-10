@@ -12,6 +12,7 @@ import {connect} from 'react-redux'
 import { setRoadTripList, setTrip, joinPlaces } from '../redux/actions/roadTripActions'
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid'
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -72,11 +73,12 @@ const RoadTripCard= (props) => {
             </Typography>
         </CardContent>
         <CardActions>
-            <Button 
+          <Button 
             size="small"
             onClick={goToTrip}
-            >Go To Trip</Button>
-                    <IconButton 
+            >Go To Trip
+          </Button>
+          <IconButton 
             aria-label="delete road trip"
             color="inherit" 
             id="delete"

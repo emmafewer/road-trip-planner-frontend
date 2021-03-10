@@ -141,7 +141,7 @@ body {
 }
 
 .myRoadTrips {
-  display: inline-flex;
+  display: flex;
   margin: 2em;
 }
 
@@ -291,4 +291,11 @@ body {
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.userContainer {
+  padding: 50px;
+  background-color: rgb(209, 206, 206);
+  text-align: center;
+  /* #618662 */
 }

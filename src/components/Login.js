@@ -31,8 +31,8 @@ class Login extends React.Component {
 
     render(){
         return(
-            <div>
-                <h1>Login Form</h1>
+            <div className="userContainer">
+                <h1>Login</h1>
                 <form className="login" onSubmit={this.login}>
                     <input 
                         type="text" 
@@ -47,6 +47,7 @@ class Login extends React.Component {
                         placeholder="Password"
                         onChange={this.props.handleOnChange}
                     />
+                    <br/>
                     <br/>
                     <input
                         type="submit"

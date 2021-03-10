@@ -31,8 +31,8 @@ class Signup extends React.Component {
 
     render(){
         return(
-            <div>
-                <h1>SignUp Form</h1>
+            <div className="userContainer">
+                <h1>SignUp</h1>
                 <form className="signup" onSubmit={this.signup}>
                     <input 
                         type="text" 
@@ -55,6 +55,7 @@ class Signup extends React.Component {
                         onChange={this.props.handleOnChange}
                     />
 
+                    <br/>
                     <br/>
                     <input
                         type="submit"
