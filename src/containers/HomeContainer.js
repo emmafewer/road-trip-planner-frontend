@@ -67,7 +67,7 @@ class HomeContainer extends React.Component {
     return (
       <div className="homeContainer" >
 
-      {/* < Slider slides={Object.values(images)} autoPlay={5} /> */}
+      {/* < Slider slides={images} autoPlay={5} /> */}
         {this.props.state.placesReducer.parks 
         ?
           <>

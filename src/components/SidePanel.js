@@ -31,11 +31,11 @@ const SidePanel = (props) => {
 
     return (
       <div className="sidePanel">
-            <div style={{display: "flex", justifyContent: "center", paddingBottom: "1em", paddingTop: "1em", backgroundColor: "white"}}>
+            <div style={{display: "flex", justifyContent: "center", paddingBottom: "1em", paddingTop: "1em"}}>
                 <Button 
                 variant="contained" 
                 color="default"
-                onClick={props.setActivePanel}
+                onClick={() => props.setActivePanel("Parks")}
                 >
                     Parks
                 </Button>
@@ -43,7 +43,7 @@ const SidePanel = (props) => {
                 <Button 
                 variant="contained" 
                 color="default"
-                onClick={props.setActivePanel}
+                onClick={() => props.setActivePanel("Campgrounds")}
                 style={{marginLeft: "1em"}}
                 >
                     Campgrounds

@@ -70,12 +70,8 @@ class ShowMap extends React.Component {
                 //     .addTo(map);
                 
                 const div = document.createElement('div')
-                if (marker.properties.id === this.props.state.mapReducer.activeFeature) {
-                    div.className = 'activeMarker'
-                } else {
-                    div.className = 'marker'  
-                }
-                  
+                div.className = 'biggerMarker'  
+            
                 new mapboxgl.Marker(div)
                     .setLngLat(marker.geometry.coordinates)
                     .setPopup(popup)

@@ -70,6 +70,7 @@ const Slider = props => {
 
   return (
     <div css={SliderCSS}>
+      <h2 style={{backgroundColor: "black", color: "white", width: "100%", textAlign: "center"}}>Park Planner is designed for you to easily search and save parks and campgrounds you'd like to visit.</h2>
       <SliderContent
         translate={translate}
         transition={transition}
@@ -79,6 +80,7 @@ const Slider = props => {
           <Slide key={slide + i} content={slide} />
         ))}
       </SliderContent>
+      
 
       {!props.autoPlay && (
         <>
@@ -97,8 +99,8 @@ Slider.defaultProps = {
 
 const SliderCSS = css`
   position: relative;
-  height: 60vh;
-  width: 60vw;
+  height: 100vh;
+  width: 100vw;
   margin: 0 auto;
   overflow: hidden;
 `

@@ -127,7 +127,7 @@ body {
   overflow-y: scroll; 
   height: 100%;
   /* padding-right: 1em; */
-  background-color: white;
+  /* background-color: white; */
 }
 
 .MapNav {
@@ -263,11 +263,20 @@ body {
 }
 
 .tentMarker {
-  background-image: url('tent-icon-2.png');
+  background-image: url('tent-icon.png');
   background-size: cover;
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.biggerMarker {
+  background-image: url('tree_icon_9.png');
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 40%;
   cursor: pointer;
 }
 

@@ -17,7 +17,7 @@ export const setUser = (user) => {
 export const logout = () => {
     return {
         type: 'LOGOUT',
-        user: {}
+        // user: {}
     }
 }
 

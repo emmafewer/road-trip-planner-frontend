@@ -21,10 +21,10 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state, user: action.user
             }
-        case 'LOGOUT':
-            return {
-                ...state, user: action.user
-            }
+        // case 'LOGOUT':
+        //     return {
+        //         ...state, user: action.user
+        //     }
         default:
             return state
     }

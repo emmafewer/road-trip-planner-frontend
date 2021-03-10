@@ -55,12 +55,12 @@ const RSideCard = (props) => {
       if (props.place.image) {
         return props.place.image
       } else {
-        return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSEcx8TdMdVfPYsB494JJm8jowH9FnwXwCgQ&usqp=CAU"      
+        return "https://i.pinimg.com/originals/32/ff/d2/32ffd2bf159d612782952c8864b580f6.png"      
       }
   }
 
   const goToWebsite = (props) => {
-    return (window.open(props.place.url))
+      return (window.open(props.place.url))
   }
 
   const fetchTrip = (props) => {
