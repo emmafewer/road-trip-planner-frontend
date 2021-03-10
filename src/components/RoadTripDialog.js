@@ -29,6 +29,7 @@ const RoadTripDialog = (props) => {
       .then(res => res.json())
       .then(trip => props.setTrip(trip))
       .then(props.history.push("/road_trip"))
+
   }
 
   return (

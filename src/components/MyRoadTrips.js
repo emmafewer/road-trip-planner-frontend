@@ -23,7 +23,7 @@ class MyRoadTrips extends React.Component {
     render () {
         return (
             <div>
-                <h1 id="myRoadTripsTitle">{this.props.state.userReducer.user.name}'s Road Trips</h1>
+                <h2 id="myRoadTripsTitle">{this.props.state.userReducer.user.name}'s Road Trips</h2>
                 <div className="myRoadTrips">
                     {this.props.state.roadTripReducer.trips
                     && 

@@ -99,7 +99,6 @@ class RoadTripContainer extends React.Component {
     render () {
         return (
             <div className="roadTripContainer">
-
                 {this.props.state.roadTripReducer.places !== "" ? null : this.setPlaces()}
 
                 {this.props.state.roadTripReducer.trip !== "" 
@@ -114,11 +113,10 @@ class RoadTripContainer extends React.Component {
                         ? < RShowMap /> 
                         : < RTestDirections />
                         }
-                        {/* <RTestMap /> */}
+                     
                     </div>
                 </>
                 }
-
             </div>
         );
     }
