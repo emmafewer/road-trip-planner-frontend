@@ -2,7 +2,8 @@ import React from 'react'
 import SidePanel from '../components/SidePanel'
 import MapContainer from './MapContainer'
 import {connect} from 'react-redux'
-import { setFilteredParks } from '../redux/actions/placesActions';
+import { setFilteredParks } from '../redux/actions/placesActions'
+import { CircularProgress } from '@material-ui/core'
 
 const BASE_URL = 'http://localhost:4000'
 
@@ -47,14 +48,14 @@ class ShowContainer extends React.Component {
             <div className="showContainer">
                 { this.props.state.placesReducer.area
                 ? 
-                <div> {this.props.state.placesReducer.places ?
+                <div> {this.props.state.placesReducer.places !== "" ?
                     <div>
                         < SidePanel />
                         < MapContainer />
                     </div> :
                     null
                 } </div> :
-                null
+                <CircularProgress style={{color: "white"}}/>
                 }
 
             </div>

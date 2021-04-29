@@ -16,8 +16,6 @@ import CampgroundDialog from './CampgroundDialog'
 import { setRoadTripList } from '../redux/actions/roadTripActions';
 import { setActiveFeature } from '../redux/actions/mapActions';
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'
-
 
 
 const BASE_URL = 'http://localhost:4000'

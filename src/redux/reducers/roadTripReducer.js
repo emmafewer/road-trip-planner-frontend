@@ -3,7 +3,7 @@ const initialState = {
     trips: null,
     trip: "",
     dates: null, 
-    places: "",
+    places: [],
     show: "Map"
 }
 

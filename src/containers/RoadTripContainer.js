@@ -3,14 +3,10 @@ import {connect} from 'react-redux'
 import RSidePanel from '../roadtrip/RSidePanel'
 import RMapNavBar from '../roadtrip/RMapNavBar'
 import RShowMap from '../roadtrip/RShowMap'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { roadTripDates, setTrip } from '../redux/actions/roadTripActions';
-import { DateRangePicker, DayPickerRangeController } from 'react-dates';
-import moment from 'moment'
-import RTestMap from '../roadtrip/RTestMap'
+import { setTrip, joinPlaces } from '../redux/actions/roadTripActions'
+import { DateRangePicker } from 'react-dates'
 import RTestDirections from '../roadtrip/RTestDirections'
-import { joinPlaces } from '../redux/actions/roadTripActions';
+import { CircularProgress, Button} from '@material-ui/core'
 
 
 const BASE_URL = 'http://localhost:4000'
@@ -99,10 +95,10 @@ class RoadTripContainer extends React.Component {
     render () {
         return (
             <div className="roadTripContainer">
-                {this.props.state.roadTripReducer.places !== "" ? null : this.setPlaces()}
+                {this.props.state.roadTripReducer.places.length > 0 ? null : this.setPlaces()}
 
-                {this.props.state.roadTripReducer.trip !== "" 
-                &&
+                {this.props.state.roadTripReducer.trip !== ""
+                ?
                 <>
                 < RSidePanel />
                     <h1 style={{paddingTop: "60px", textAlign: "center", paddingRight: "100px"}}>{this.props.state.roadTripReducer.trip.name} {this.checkForDates()}</h1>
@@ -116,6 +112,7 @@ class RoadTripContainer extends React.Component {
                      
                     </div>
                 </>
+                : <CircularProgress style={{color: "white", alignItems: "center", verticalAlign: "middle", position: "relative"}}/>
                 }
             </div>
         );

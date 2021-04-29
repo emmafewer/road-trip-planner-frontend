@@ -2,7 +2,7 @@ const initialState = {
     start: null,
     end: null,
     area: null,
-    places: null,
+    places: "",
     active: "Parks",
     parks: null
 }

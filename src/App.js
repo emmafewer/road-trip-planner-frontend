@@ -5,7 +5,7 @@ import Profile from './components/Profile'
 import Signup from './components/Signup'
 import {connect} from 'react-redux'
 import HomeContainer from './containers/HomeContainer'
-import { Route, withRouter, Switch } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import {setUser} from './redux/actions/userActions'
 import ShowContainer from './containers/ShowContainer'
 import MyRoadTrips from './components/MyRoadTrips'
@@ -51,6 +51,9 @@ class App extends React.Component {
             <Route exact path='/profile' render={() => < Profile />}/>
             <Route exact path='/road_trips' render={(props) => < MyRoadTrips {...props}/>}/>
             <Route exact path='/road_trip' render={(props) => < RoadTripContainer {...props}/>}/>
+            {/* <Route exact path='users/:user_id/road_trips/:road_trip_id' render={(props)/> */} 
+            {/* .match on props */}
+            {/* On ComponentDidMount get the parks and campgrounds so it doesn't take long to load page */}
           </>
           : 
           <>

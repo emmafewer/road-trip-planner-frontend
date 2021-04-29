@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom'
 import { logout } from '../redux/actions/userActions'
 import {connect} from 'react-redux'
 import { joinPlaces, setTrip, setShow } from '../redux/actions/roadTripActions';
-import { setActivePanel } from '../redux/actions/placesActions';
+import { setActivePanel, setFilteredParks } from '../redux/actions/placesActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,6 +70,7 @@ const Nav = (props) => {
               props.setTrip("")
               props.setShow("Map")
               props.setActivePanel("Parks")
+              props.setFilteredParks("")
             }}>
             Park Planner
           </Typography>
@@ -119,7 +120,7 @@ const Nav = (props) => {
                 <MenuItem onClick={() => handleClick('/profile')}>Profile</MenuItem>
                 <MenuItem onClick={() => {
                   handleClick('/road_trips')
-                  props.joinPlaces("")
+                  props.joinPlaces([])
                   props.setTrip("")
                   props.setShow("Map")
                   props.setActivePanel("Parks")}}>My Road Trips</MenuItem>
@@ -141,10 +142,11 @@ const Nav = (props) => {
 const mapDispatchToProps = dispatch => {
   return {
       logout: () => dispatch(logout()),
-      joinPlaces: (empty) => dispatch(joinPlaces(empty)),
+      joinPlaces: (place) => dispatch(joinPlaces(place)),
       setTrip: (empty) => dispatch(setTrip(empty)),
       setShow: (string) => dispatch(setShow(string)),
-      setActivePanel: (string) => dispatch(setActivePanel(string))
+      setActivePanel: (string) => dispatch(setActivePanel(string)),
+      setFilteredParks: (empty) => dispatch(setFilteredParks(empty))
   }
 }
 
